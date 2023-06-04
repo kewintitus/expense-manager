@@ -3,6 +3,7 @@ import { Inter, Roboto } from 'next/font/google';
 import Providers from './provider';
 import Nav from '@/Components/Nav';
 import Sidebar from '@/Components/Sidebar';
+import MobileNav from '@/UI/MobileNav';
 
 const inter = Inter({ subsets: ['latin'] });
 const roboto = Roboto({
@@ -21,10 +22,11 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.className} overflow-hidden`}>
         <Providers>
           <Nav />
-          <div>
+          <div className=" h-screen overflow-y-scroll pb-16 pt-2">
             {/* <Sidebar /> */}
             {children}
           </div>
+          <MobileNav />
         </Providers>
       </body>
     </html>

@@ -18,14 +18,14 @@ import { SiSimpleanalytics } from 'react-icons/si';
 const Nav = () => {
   //   const home = <Home />;
   return (
-    <div className="px-2 flex h-16 items-center gap-2 nav-light--bg text-slate-800 dark:nav-dark--bg dark:text-gray-300">
+    <div className=" px-2 flex justify-between sm:justify-normal h-16 sm:w-full  items-center gap-2 nav-light--bg text-slate-800 dark:nav-dark--bg dark:text-gray-300">
       {/* <MdMenu size={32} /> */}
       <div className="flex items-center gap-2 font-bold text-lg">
         <Image width={36} height={36} src={Logo} />
         <h2>Expenses Manager</h2>
       </div>
       {/* <Link href="/">Home</Link> */}
-      <div className="flex items-center gap-2">
+      <div className="hidden sm:flex items-center gap-2">
         <NavLink icon={<MdHome size={24} />} name="Home" href="/" />
         <NavLink icon={<MdBarChart size={24} />} name="Analysis" href="/" />
         <NavLink
@@ -35,7 +35,7 @@ const Nav = () => {
         />
         <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/" />
       </div>
-      <Button />
+      <Button className="justify-self-end" />
     </div>
   );
 };
