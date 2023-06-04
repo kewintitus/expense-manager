@@ -11,7 +11,7 @@ import {
 
 const MobileNav = () => {
   return (
-    <div className="h-16 flex sm:hidden nav-light--bg dark:nav-dark--bg  z-50 absolute bottom-0 w-full outline outline-gray-400 outline-[0.25px]">
+    <div className="h-16 flex sm:hidden nav-light--bg dark:nav-dark--bg  z-50 absolute bottom-0 w-full outline outline-gray-400 outline-1">
       <MobileNavLink icon={<MdHome size={24} />} name="Home" href="/" />
       <MobileNavLink icon={<MdBarChart size={24} />} name="Analysis" href="/" />
       <MobileNavLink
