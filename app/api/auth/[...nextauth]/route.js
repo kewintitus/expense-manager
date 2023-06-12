@@ -26,12 +26,13 @@ const authOptions = {
         const userExists = await User.find({ email: profile.email });
         console.log('sign In', profile);
         console.log('Env Google', process.env.GOOGLE_CUSTOMER_ID);
-        console.log(userExists);
+        console.log('Check user', userExists);
 
-        if (!userExists) {
+        if (!userExists || userExists.length === 0) {
+          console.log('Create user in db');
           await User.create({
             email: profile.email,
-            username: profile.username,
+            username: profile.name,
             image: profile.image,
           });
         }
