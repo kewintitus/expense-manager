@@ -10,8 +10,10 @@ import {
   MdHome,
   MdMenu,
   MdMoreHoriz,
+  MdOutlineAccountCircle,
 } from 'react-icons/md';
 import { SiSimpleanalytics } from 'react-icons/si';
+import AccountPopover from '@/UI/popover/AccountPopover';
 // import Home from '@mui/icons-material/Home';
 // import { Home } from '@mui/icons-material';
 
@@ -36,6 +38,15 @@ const Nav = () => {
         <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/" />
       </div>
       <Button className="justify-self-end" />
+      <AccountPopover>
+        <div className="flex gap-2">
+          <MdOutlineAccountCircle className="text-4xl" />
+          <div className="">
+            <div className="text-base">Fname Lname</div>
+            <div className="text-sm">mailId</div>
+          </div>
+        </div>
+      </AccountPopover>
     </div>
   );
 };
