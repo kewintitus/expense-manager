@@ -12,13 +12,15 @@ import {
   MdMoreHoriz,
   MdOutlineAccountCircle,
 } from 'react-icons/md';
-import { SiSimpleanalytics } from 'react-icons/si';
+
 import AccountPopover from '@/UI/popover/AccountPopover';
+// import { useSession } from 'next-auth/react';
 // import Home from '@mui/icons-material/Home';
 // import { Home } from '@mui/icons-material';
 
 const Nav = () => {
   //   const home = <Home />;
+  // const { data: session } = useSession();
   return (
     <div className=" px-2 flex justify-between sm:justify-normal h-16 sm:w-full  items-center gap-2 nav-light--bg text-slate-800 dark:nav-dark--bg dark:text-gray-300">
       {/* <MdMenu size={32} /> */}

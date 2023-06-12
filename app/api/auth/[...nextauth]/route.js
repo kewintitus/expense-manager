@@ -8,13 +8,14 @@ const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CUSTOMER_ID,
-      clientSecret: process.env.GOOGLE_CUSTOMER_SECRET_CODE,
+      clientSecret: process.env.GOOGLE_CUSTOMER_SECRET,
     }),
   ],
   callbacks: {
     async session({ session }) {
+      console.log(session);
       const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
+      session.user.id = sessionUser?._id.toString();
       return session;
     },
 
@@ -23,7 +24,8 @@ const authOptions = {
         await connectToDb();
 
         const userExists = await User.find({ email: profile.email });
-        console.log(profile.name);
+        console.log('sign In', profile);
+        console.log('Env Google', process.env.GOOGLE_CUSTOMER_ID);
         console.log(userExists);
 
         if (!userExists) {
