@@ -4,7 +4,7 @@ import { connect } from 'mongoose';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-const authOptions = {
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CUSTOMER_ID,
@@ -24,16 +24,16 @@ const authOptions = {
         await connectToDb();
 
         const userExists = await User.find({ email: profile.email });
-        console.log('sign In', profile);
-        console.log('Env Google', process.env.GOOGLE_CUSTOMER_ID);
-        console.log('Check user', userExists);
+        // console.log('sign In', profile);
+        // console.log('Env Google', process.env.GOOGLE_CUSTOMER_ID);
+        // console.log('Check user', userExists);
 
         if (!userExists || userExists.length === 0) {
           console.log('Create user in db');
           await User.create({
             email: profile.email,
             username: profile.name,
-            image: profile.image,
+            image: profile.picture,
           });
         }
         return true;

@@ -14,13 +14,18 @@ import {
 } from 'react-icons/md';
 
 import AccountPopover from '@/UI/popover/AccountPopover';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 // import { useSession } from 'next-auth/react';
 // import Home from '@mui/icons-material/Home';
 // import { Home } from '@mui/icons-material';
 
-const Nav = () => {
+const Nav = async () => {
+  // const session = await getServerSession(authOptions);
+  // console.log('in nav', session);
   //   const home = <Home />;
   // const { data: session } = useSession();
+
   return (
     <div className=" px-2 flex justify-between sm:justify-normal h-16 sm:w-full  items-center gap-2 nav-light--bg text-slate-800 dark:nav-dark--bg dark:text-gray-300">
       {/* <MdMenu size={32} /> */}
@@ -41,13 +46,13 @@ const Nav = () => {
       </div>
       <Button className="justify-self-end" />
       <AccountPopover>
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <MdOutlineAccountCircle className="text-4xl" />
           <div className="">
             <div className="text-base">Fname Lname</div>
             <div className="text-sm">mailId</div>
           </div>
-        </div>
+        </div> */}
       </AccountPopover>
     </div>
   );

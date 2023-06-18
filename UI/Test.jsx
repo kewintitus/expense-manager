@@ -3,6 +3,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import TransactionStatuscards from '@/Components/TransactionStatuscards';
 // import { data } from 'autoprefixer';
 
 const Test = () => {
@@ -17,13 +18,20 @@ const Test = () => {
   console.log(session, status);
 
   return (
-    <p>
+    <>
       {status === 'unauthenticated' ? (
-        <p>Kingly Login</p>
+        <div className="w-full h-full bg-slate-700">
+          Kindly Login to continue
+        </div>
       ) : (
-        <p>Logged in as {session?.user?.name}</p>
+        <div className="w-full h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3">
+          <div className=" font-medium text-lg ">
+            Welcome {session?.user?.name}
+          </div>
+          <TransactionStatuscards />
+        </div>
       )}
-    </p>
+    </>
   );
 };
 
