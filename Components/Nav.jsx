@@ -44,7 +44,7 @@ const Nav = async () => {
         />
         <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/" />
       </div>
-      <Button className="justify-self-end" />
+      <Button className="justify-self-end ml-auto" />
       <AccountPopover>
         {/* <div className="flex gap-2">
           <MdOutlineAccountCircle className="text-4xl" />
