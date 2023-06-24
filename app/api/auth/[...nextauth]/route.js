@@ -1,4 +1,5 @@
 import User from '@/models/user';
+import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
 import { connect } from 'mongoose';
 import NextAuth from 'next-auth';
@@ -34,6 +35,16 @@ export const authOptions = {
             email: profile.email,
             username: profile.name,
             image: profile.picture,
+          });
+
+          await userMetrics.create({
+            spending: 0,
+            income: 0,
+            balance: 0,
+            user: {
+              email: profile.email,
+              username: profile.name,
+            },
           });
         }
         return true;

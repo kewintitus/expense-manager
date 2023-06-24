@@ -27,7 +27,7 @@ const AccountPopover = (props) => {
               className="rounded-full self-center"
               height={36}
               width={36}
-              src="https://lh3.googleusercontent.com/a/AAcHTtcpX4-ldjY0UkTpvDBdkvN-8yvOWYfdFE2rv8Hdug=s96-c"
+              src={session?.user?.image}
             />
           ) : (
             <MdOutlineAccountCircle className="text-4xl" />
