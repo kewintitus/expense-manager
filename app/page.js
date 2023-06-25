@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="  h-full">
+    <div className="  h-full bg-[#F3F2EF]">
       <Test />
     </div>
   );
