@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import TransactionStatuscards from '@/Components/TransactionStatuscards';
+import SelectMonth from '@/Components/datepickers/SelectMonth';
 // import { data } from 'autoprefixer';
 
 const Test = () => {
@@ -28,7 +29,10 @@ const Test = () => {
           <div className=" font-medium text-lg ">
             Welcome {session?.user?.name}
           </div>
-          <TransactionStatuscards />
+          <div className="flex items-center justify-between">
+            <TransactionStatuscards />
+            <SelectMonth />
+          </div>
         </div>
       )}
     </>
