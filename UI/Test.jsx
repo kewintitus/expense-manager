@@ -8,6 +8,7 @@ import SelectMonth from '@/Components/datepickers/SelectMonth';
 import Button from './Button';
 import AddButton from './AddButton';
 import TransactionTable from '@/Components/table/TransactionTable';
+import TransactionCards from '@/Components/cards/transaction/TransactionCards';
 // import { data } from 'autoprefixer';
 
 const Test = () => {
@@ -50,6 +51,9 @@ const Test = () => {
           </div>
           <div className="hidden sm:block">
             <TransactionTable />
+          </div>
+          <div className="block sm:hidden">
+            <TransactionCards />
           </div>
         </div>
       )}
