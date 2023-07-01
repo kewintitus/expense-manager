@@ -29,18 +29,28 @@ const Test = () => {
         </div>
       ) : (
         <div className="w-full h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3">
-          <div className=" font-medium text-lg ">
-            Welcome {session?.user?.name}
+          <div className="flex w-full items-center justify-between ">
+            <div className=" font-medium text-lg ">
+              Welcome {session?.user?.name}
+            </div>
+            {/* <div className="flex sm:hidden ml-auto sm:self-end w-full ">
+              <SelectMonth />
+            </div> */}
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center  justify-between">
             <TransactionStatuscards />
-            <SelectMonth />
+            <div className="hidden sm:flex">
+              <SelectMonth />
+            </div>
           </div>
+
           <div className="flex items-center justify-between my-2">
             <h5>Recent Transactions</h5>
-            <AddButton>Add New Transaction</AddButton>
+            <AddButton>Add </AddButton>
           </div>
-          <TransactionTable />
+          <div className="hidden sm:block">
+            <TransactionTable />
+          </div>
         </div>
       )}
     </>

@@ -7,8 +7,8 @@ import { MdArrowUpward } from 'react-icons/md';
 
 const SpendingStatusCard = (props) => {
   return (
-    <div className=" bg-[#F67070] h-16 w-48 rounded-full p-1 flex items-center text-white outline outline-1 outline-[#FFBFBF]">
-      <div className="h-14 w-14 bg-[#FF9494] rounded-full flex items-center justify-center">
+    <div className="h-12 w-36 bg-[#F67070] sm:h-16 sm:w-48 rounded-full p-1 flex items-center text-white outline outline-1 outline-[#FFBFBF]">
+      <div className="h-10 w-10 sm:h-14 sm:w-14 bg-[#FF9494] rounded-full flex items-center justify-center">
         <MdArrowUpward className="text-4xl" />
       </div>
       <div className=" justify-self-center ml-4">

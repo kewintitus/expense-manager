@@ -35,7 +35,7 @@ const SelectMonth = () => {
   };
 
   return (
-    <div className="rounded-md  flex h-12 px-4 items-center justify-center w-56 gap-2 outline outline-1 outline-[#dcdbd7]  dark:outline-[#252525] bg-[#e7e6e3] dark:bg-[#14141E]">
+    <div className=" text-sm rounded-md  flex h-12 px-4 items-center justify-center w-52 gap-2 outline outline-1 outline-[#dcdbd7]  dark:outline-[#252525] bg-[#e7e6e3] dark:bg-[#14141E]">
       {/* <Calendar view="year" onChange={onChange} value={value} /> */}
       <div className="cursor-pointer w-8  rounded-full" onClick={reduceDate}>
         <MdChevronLeft />
