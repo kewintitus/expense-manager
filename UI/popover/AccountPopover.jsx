@@ -32,7 +32,7 @@ const AccountPopover = (props) => {
           ) : (
             <MdOutlineAccountCircle className="text-4xl" />
           )}
-          <div className="">
+          <div className="hidden sm:block">
             <div className="text-base">{session?.user?.name}</div>
             <div className="text-sm">{session?.user?.email}</div>
           </div>
