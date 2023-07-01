@@ -2,7 +2,7 @@ import React from 'react';
 
 const TxnTableHead = () => {
   return (
-    <th className="flex items-center justify-start h-9 text-left px-1 bg-slate-300 text-slate-900 dark:bg-[#676767] dark:text-inherit font-normal">
+    <th className="flex items-center justify-start rounded-sm text-sm h-9 text-left px-1 bg-gray-300 text-slate-900 dark:bg-[#676767] dark:text-inherit font-normal">
       <div className="w-[5%]">S.No</div>
       <div className="w-[15%] text-left">Transaction Type</div>
       <div className="w-[15%]">Category</div>

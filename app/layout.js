@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.className} overflow-hidden`}>
         <Providers>
           <Nav />
-          <div className="h-screen overflow-y-scroll pb-16 ">
+          <div className="h-screen  pb-16 ">
             {/* <Sidebar /> */}
             {children}
           </div>
