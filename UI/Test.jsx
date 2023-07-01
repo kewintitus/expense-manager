@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import TransactionStatuscards from '@/Components/TransactionStatuscards';
 import SelectMonth from '@/Components/datepickers/SelectMonth';
+import Button from './Button';
+import AddButton from './AddButton';
+import TransactionTable from '@/Components/table/TransactionTable';
 // import { data } from 'autoprefixer';
 
 const Test = () => {
@@ -33,6 +36,11 @@ const Test = () => {
             <TransactionStatuscards />
             <SelectMonth />
           </div>
+          <div className="flex items-center justify-between my-2">
+            <h5>Recent Transactions</h5>
+            <AddButton>Add New Transaction</AddButton>
+          </div>
+          <TransactionTable />
         </div>
       )}
     </>
