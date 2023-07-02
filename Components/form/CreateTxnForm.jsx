@@ -52,7 +52,7 @@ const CreateTxnForm = (props) => {
     { name: 'Bank Account', icon: <AiFillBank /> },
   ];
   return (
-    <form className="flex-col items-center justify-center w-full">
+    <form className="flex-col items-center justify-center w-full outline outline-1 outline-[#2E2E2E] p-2 rounded-md">
       <div className="flex justify-start gap-2">
         <div className="flex-col gap-1 flex-1">
           <label className="block text-xs  text-[#8C8C8C]" htmlFor="">
