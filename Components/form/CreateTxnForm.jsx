@@ -1,6 +1,6 @@
 'use client';
 import FormLabel from '@/UI/formui/FormLabel';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectCategory from '../select/SelectCategory';
 import {
   MdFlight,
@@ -21,6 +21,8 @@ import {
 } from 'react-icons/fa';
 import { AiFillBank, AiOutlineBank } from 'react-icons/ai';
 import SelectTxnMode from '../select/SelectTxnMode';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const CreateTxnForm = (props) => {
   const categories = {
