@@ -26,7 +26,7 @@ const SelectMonth = () => {
   const increaseDate = () => {
     const actDate = new Date();
     const currDate = new Date(month_year);
-    if (new Date(actDate) > new Date(currDate)) {
+    if (new Date(actDate).getMonth() > new Date(currDate).getMonth()) {
       const options = { month: 'long', year: 'numeric' };
       currDate.setMonth(currDate.getMonth() + 1);
       const formattedDate = currDate.toLocaleString('en-US', options);
