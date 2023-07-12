@@ -54,51 +54,51 @@ const CreateTxnForm = (props) => {
     { name: 'Bank Account', icon: <AiFillBank /> },
   ];
   return (
-    <form className="flex-col items-center justify-center w-full outline outline-1 outline-[#2E2E2E] p-2 rounded-md">
-      <div className="flex justify-start gap-2">
-        <div className="flex-col gap-1 flex-1">
+    <form className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md">
+      <div className="flex w-full justify-start gap-2">
+        <div className="flex flex-col items-start gap-1 flex-1">
           <label className="block text-xs  text-[#8C8C8C]" htmlFor="">
             Transaction Date
           </label>
           <input
             type="date"
-            className="h-8 min-w-8 text-xs  dark:bg-[#191919] px-2"
+            className="h-8 min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
           />
         </div>
-        <div className="flex-1">
+        <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Select Category</FormLabel>
           <SelectCategory type={props.txnType} data={categories} />
         </div>
       </div>
-      <div className="flex justify-start gap-2">
-        <div className="flex-1">
+      <div className="flex justify-start w-full gap-2">
+        <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Mode</FormLabel>
           <SelectTxnMode data={txnMode} />
         </div>
-        <div className="flex-1">
+        <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Amount</FormLabel>
           <input
             type="number"
-            className="h-8 min-w-8 text-xs  dark:bg-[#191919] px-2"
+            className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm  dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
           />
         </div>
       </div>
-      <div className="flex justify-start gap-2">
+      <div className="flex justify-start w-full gap-2">
         <div className="flex-1">
-          <div className="flex-col">
+          <div className="flex flex-col items-start gap-1 flex-1">
             <FormLabel>Note</FormLabel>
             <input
               type="text"
-              className="h-8 min-w-8 text-xs  dark:bg-[#191919] px-2"
+              className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
             />
           </div>
         </div>
         <div className="flex-1">
-          <div className="flex-col">
+          <div className="flex flex-col items-start gap-1 flex-1">
             <FormLabel>Tags</FormLabel>
             <input
               type="text"
-              className="h-8 min-w-8 text-xs  dark:bg-[#191919] px-2"
+              className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
             />
           </div>
         </div>

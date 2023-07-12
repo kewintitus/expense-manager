@@ -14,7 +14,7 @@ const SelectTxnMode = (props) => {
       }}
     >
       <Select.Trigger
-        className="dark:bg-[#191919] w-32 text-sm flex justify-between items-center h-8 px-2 "
+        className="dark:bg-[#191919]  w-32 text-sm flex justify-between items-center  h-8 px-2  bg-slate-100 outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] rounded-sm"
         aria-label="category"
       >
         <Select.Value placeholder="Select" />
@@ -23,7 +23,7 @@ const SelectTxnMode = (props) => {
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="dark:bg-slate-600 dark:text-stone-300 text-sm">
+        <Select.Content className=" bg-[#F2F2F2] dark:bg-slate-600 dark:text-stone-300 text-sm ">
           <Select.Viewport>
             <Select.Group>
               {props.data.map((data) => (
@@ -48,7 +48,7 @@ const SelectItem = React.forwardRef((props, forwardedRef) => {
     <Select.Item
       {...props}
       ref={forwardedRef}
-      className="w-full flex items-center justify-between p-1 cursor-pointer"
+      className="w-full flex items-center justify-between  px-2 py-1 hover:bg-[#d6d6d6] dark:hover:bg-slate-800 cursor-pointer"
     >
       <div className="flex items-center gap-1">
         <Select.Icon>{props.icon}</Select.Icon>
