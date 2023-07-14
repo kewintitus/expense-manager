@@ -10,7 +10,7 @@ const SelectTxnMode = (props) => {
   return (
     <Select.Root
       onValueChange={(e) => {
-        console.log(e);
+        props.setTransactionMode(e);
       }}
     >
       <Select.Trigger

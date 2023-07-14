@@ -15,7 +15,8 @@ const SelectCategory = (props) => {
   return (
     <Select.Root
       onValueChange={(e) => {
-        console.log(e);
+        // console.log(e);
+        props.setCategory(e);
       }}
     >
       <Select.Trigger

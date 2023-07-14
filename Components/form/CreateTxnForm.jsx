@@ -23,8 +23,11 @@ import { AiFillBank, AiOutlineBank } from 'react-icons/ai';
 import SelectTxnMode from '../select/SelectTxnMode';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import SubmitBtn from '@/UI/formui/SubmitBtn';
 
 const CreateTxnForm = (props) => {
+  // const [data, setData] = useState({});
+  let date, category, transactionMode, amount, note, tags;
   const categories = {
     expense: [
       { name: 'Food & Dining', icon: <MdOutlineFastfood /> },
@@ -48,37 +51,68 @@ const CreateTxnForm = (props) => {
       { name: 'Gifts & Donations', icon: <FaGift /> },
     ],
   };
+  const setCategory = (value) => {
+    console.log(value);
+    category = value;
+  };
 
+  const setTransactionMode = (value) => {
+    console.log(value);
+    transactionMode = value;
+  };
+
+  // const setData = () => {};
   const txnMode = [
     { name: 'Cash', icon: <FaMoneyBill /> },
     { name: 'Bank Account', icon: <AiFillBank /> },
   ];
   return (
-    <form className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+      className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md"
+    >
       <div className="flex w-full justify-start gap-2">
         <div className="flex flex-col items-start gap-1 flex-1">
           <label className="block text-xs  text-[#8C8C8C]" htmlFor="">
             Transaction Date
           </label>
           <input
-            type="date"
+            type="datetime-local"
             className="h-8 min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
+            onChange={(e) => {
+              // setData((prev) => setData(e.target.value));
+              date = e.target.value;
+              // console.log(e.target.value);
+              console.log(date);
+            }}
           />
         </div>
         <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Select Category</FormLabel>
-          <SelectCategory type={props.txnType} data={categories} />
+          <SelectCategory
+            setCategory={setCategory}
+            type={props.txnType}
+            data={categories}
+          />
         </div>
       </div>
       <div className="flex justify-start w-full gap-2">
         <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Mode</FormLabel>
-          <SelectTxnMode data={txnMode} />
+          <SelectTxnMode
+            setTransactionMode={setTransactionMode}
+            data={txnMode}
+          />
         </div>
         <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Amount</FormLabel>
           <input
             type="number"
+            onChange={(e) => {
+              amount = e.target.value;
+            }}
             className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm  dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
           />
         </div>
@@ -90,6 +124,10 @@ const CreateTxnForm = (props) => {
             <input
               type="text"
               className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
+              onChange={(e) => {
+                note = e.target.value;
+                // console.log(note);
+              }}
             />
           </div>
         </div>
@@ -99,10 +137,15 @@ const CreateTxnForm = (props) => {
             <input
               type="text"
               className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
+              onChange={(e) => {
+                tags = e.target.value;
+                // console.log(tags);
+              }}
             />
           </div>
         </div>
       </div>
+      <SubmitBtn type="submit">Submit</SubmitBtn>
     </form>
   );
 };
