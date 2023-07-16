@@ -32,7 +32,7 @@ const AddExpense = () => {
   return (
     <div className="px-6">
       <BreadCrumb paths={paths} />
-      <div className="">
+      <div className="mb-3">
         <h5 className="text-[#8C8C8C] text-sm">Select Transaction Type</h5>
         <SelectTransactionType fn={fetchData} />
       </div>

@@ -24,6 +24,8 @@ import SelectTxnMode from '../select/SelectTxnMode';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import SubmitBtn from '@/UI/formui/SubmitBtn';
+import Link from 'next/link';
+import CancelBtn from '@/UI/formui/CancelBtn';
 
 const CreateTxnForm = (props) => {
   // const [data, setData] = useState({});
@@ -145,7 +147,12 @@ const CreateTxnForm = (props) => {
           </div>
         </div>
       </div>
-      <SubmitBtn type="submit">Submit</SubmitBtn>
+      <div className="flex gap-2 ml-auto pt-3">
+        <Link href="/">
+          <CancelBtn className="">Cancel</CancelBtn>
+        </Link>
+        <SubmitBtn type="submit">Submit</SubmitBtn>
+      </div>
     </form>
   );
 };

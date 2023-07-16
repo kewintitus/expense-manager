@@ -14,7 +14,7 @@ const SelectTransactionType = (props) => {
       }}
     >
       <Select.Trigger
-        className="dark:bg-[#191919] w-24 flex justify-between items-center p-2"
+        className="dark:bg-[#191919]  w-32 text-sm flex justify-between items-center  h-8 px-2  bg-slate-100 outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] rounded-sm"
         aria-label="Food"
       >
         <Select.Value placeholder="select" />
@@ -23,7 +23,7 @@ const SelectTransactionType = (props) => {
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="dark:bg-slate-600 dark:text-stone-300">
+        <Select.Content className="text-sm bg-[#F2F2F2] dark:bg-slate-600 dark:text-stone-300">
           <Select.Viewport>
             <Select.Group
               onChange={(e) => {
