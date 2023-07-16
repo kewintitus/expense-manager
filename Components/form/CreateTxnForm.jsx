@@ -26,6 +26,7 @@ import { useRouter } from 'next/navigation';
 import SubmitBtn from '@/UI/formui/SubmitBtn';
 import Link from 'next/link';
 import CancelBtn from '@/UI/formui/CancelBtn';
+import axios from 'axios';
 
 const CreateTxnForm = (props) => {
   // const [data, setData] = useState({});
@@ -48,8 +49,8 @@ const CreateTxnForm = (props) => {
       { name: 'Others', icon: <MdMoreHoriz /> },
     ],
     income: [
-      { name: 'Taxes', icon: <MdOutlineCurrencyRupee /> },
-      { name: 'Insurance', icon: <AiOutlineBank /> },
+      { name: 'Salary', icon: <MdOutlineCurrencyRupee /> },
+      // { name: 'Insurance', icon: <AiOutlineBank /> },
       { name: 'Gifts & Donations', icon: <FaGift /> },
     ],
   };
@@ -62,6 +63,29 @@ const CreateTxnForm = (props) => {
     console.log(value);
     transactionMode = value;
   };
+  const saveTransaction = async () => {
+    try {
+      const result = await axios.post(
+        `${process.env.NEXT_PUBLIC_APIURL}/api/transactions`,
+        {
+          transactionType: props.txnType,
+          transactionDate: date,
+          transactionCategory: category,
+          transactionMode,
+          transactionAmount: amount,
+          transactionNote: note,
+          transactionTags: tags,
+          user: props.user,
+        }
+      );
+      window.alert('Transaction saved successfully');
+      props.setTxnType(null);
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(result);
+  };
 
   // const setData = () => {};
   const txnMode = [
@@ -72,6 +96,7 @@ const CreateTxnForm = (props) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        saveTransaction();
       }}
       className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md"
     >

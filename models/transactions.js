@@ -13,6 +13,10 @@ const TransactionSchema = new Schema({
     type: String,
     required: [true, 'Transactions must be of a category'],
   },
+  transactionMode: {
+    type: String,
+    required: [true, 'Transaction must have a transaction mode'],
+  },
   transactionAmount: {
     type: Number,
     required: [true, 'Transaction must have an amount'],
@@ -23,9 +27,13 @@ const TransactionSchema = new Schema({
   transactionTags: {
     type: String,
   },
+  user: {
+    type: String,
+    required: [true, 'Must be logged in to save transaction'],
+  },
 });
 
 const Transaction =
-  models.Transaction || model('Transactions', TransactionSchema);
+  models.Transactions || model('Transactions', TransactionSchema);
 
 export default Transaction;

@@ -20,7 +20,10 @@ const AddExpense = () => {
     if (status === 'unauthenticated') {
       setUserSession(null);
       router.push('/');
-    } else if (status === 'authenticated') setUserSession(session);
+    } else if (status === 'authenticated') {
+      setUserSession(session);
+      // console.log(session.user.email);
+    }
   }, [session, status]);
 
   const [txnType, setTxnType] = useState(null);
@@ -36,7 +39,13 @@ const AddExpense = () => {
         <h5 className="text-[#8C8C8C] text-sm">Select Transaction Type</h5>
         <SelectTransactionType fn={fetchData} />
       </div>
-      {txnType && <CreateTxnForm txnType={txnType} />}
+      {txnType && (
+        <CreateTxnForm
+          setTxnType={setTxnType}
+          txnType={txnType}
+          user={session.user.email}
+        />
+      )}
     </div>
   );
 };
