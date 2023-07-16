@@ -22,7 +22,7 @@ import {
 import { AiFillBank, AiOutlineBank } from 'react-icons/ai';
 import SelectTxnMode from '../select/SelectTxnMode';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import SubmitBtn from '@/UI/formui/SubmitBtn';
 import Link from 'next/link';
 import CancelBtn from '@/UI/formui/CancelBtn';
@@ -30,6 +30,8 @@ import axios from 'axios';
 
 const CreateTxnForm = (props) => {
   // const [data, setData] = useState({});
+  const { data: session, status } = useSession();
+
   let date, category, transactionMode, amount, note, tags;
   const categories = {
     expense: [
@@ -68,14 +70,17 @@ const CreateTxnForm = (props) => {
       const result = await axios.post(
         `${process.env.NEXT_PUBLIC_APIURL}/api/transactions`,
         {
-          transactionType: props.txnType,
-          transactionDate: date,
-          transactionCategory: category,
-          transactionMode,
-          transactionAmount: amount,
-          transactionNote: note,
-          transactionTags: tags,
-          user: props.user,
+          savedata: {
+            transactionType: props.txnType,
+            transactionDate: date,
+            transactionCategory: category,
+            transactionMode,
+            transactionAmount: amount,
+            transactionNote: note,
+            transactionTags: tags,
+            user: props.user,
+          },
+          email: session.user.email,
         }
       );
       window.alert('Transaction saved successfully');

@@ -8,17 +8,17 @@ const createNewTransaction = async (req) => {
     console.log(req.body);
     console.log('INNNNN');
     const body = await req.json();
-    const data = await Transaction.create(body);
-    if (body.transactionType === 'expense') {
+    const data = await Transaction.create(body.savedata);
+    if (body.savedata.transactionType === 'expense') {
       const updateMetrics = await userMetrics.findOneAndUpdate(
         {
-          'user.email': 'kewintitus@gmail.com',
+          'user.email': body.email,
         },
 
         {
           $inc: {
-            spending: +body.transactionAmount,
-            balance: -body.transactionAmount,
+            spending: +body.savedata.transactionAmount,
+            balance: -body.savedata.transactionAmount,
           },
         }
         //   { $inc: { balance: body.transactionAmount } },
@@ -26,12 +26,12 @@ const createNewTransaction = async (req) => {
     } else {
       const updateMetrics = await userMetrics.findOneAndUpdate(
         {
-          'user.email': 'kewintitus@gmail.com',
+          'user.email': body.email,
         },
         {
           $inc: {
-            income: +body.transactionAmount,
-            balance: +body.transactionAmount,
+            income: +body.savedata.transactionAmount,
+            balance: +body.savedata.transactionAmount,
           },
         }
       );
