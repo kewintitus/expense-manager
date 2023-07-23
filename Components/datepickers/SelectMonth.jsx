@@ -5,6 +5,19 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 const SelectMonth = () => {
   const [month_year, setmonth_year] = useState('loading...');
 
+  const dateLimit = {
+    startDate: new Date(
+      new Date(month_year).getFullYear(),
+      new Date(month_year).getMonth(),
+      1
+    ),
+    endDate: new Date(
+      new Date(month_year).getFullYear(),
+      new Date(month_year).getMonth() - 1,
+      0
+    ),
+  };
+
   useEffect(() => {
     const setDate = () => {
       const date = new Date();
@@ -21,6 +34,16 @@ const SelectMonth = () => {
     const options = { month: 'long', year: 'numeric' };
     currDate.setMonth(currDate.getMonth() - 1);
     const formattedDate = currDate.toLocaleString('en-US', options);
+    console.log(formattedDate);
+    console.log(
+      'startDate',
+      new Date(currDate.getFullYear(), currDate.getMonth(), 1).toISOString()
+    );
+    console.log(
+      'endDate',
+      new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0).toISOString()
+    );
+
     setmonth_year(formattedDate);
   };
   const increaseDate = () => {
@@ -30,6 +53,7 @@ const SelectMonth = () => {
       const options = { month: 'long', year: 'numeric' };
       currDate.setMonth(currDate.getMonth() + 1);
       const formattedDate = currDate.toLocaleString('en-US', options);
+      console.log(formattedDate);
       setmonth_year(formattedDate);
     }
   };
