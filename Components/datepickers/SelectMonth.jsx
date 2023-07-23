@@ -1,9 +1,20 @@
+'use client';
+// import transactionReducer from '@/app/redux/reducers/transactionReducer';
+import {
+  selectTransactionData,
+  setTransactions,
+} from '@/app/redux/slices/transactionSlice';
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SelectMonth = () => {
   const [month_year, setmonth_year] = useState('loading...');
+  const dispatch = useDispatch();
+
+  const transactionData = useSelector(selectTransactionData);
+  console.log('TransactionData', transactionData.trasactionReducer);
 
   const dateLimit = {
     startDate: new Date(
@@ -35,6 +46,16 @@ const SelectMonth = () => {
     currDate.setMonth(currDate.getMonth() - 1);
     const formattedDate = currDate.toLocaleString('en-US', options);
     console.log(formattedDate);
+    dateLimit.startDate = new Date(
+      currDate.getFullYear(),
+      currDate.getMonth(),
+      1
+    ).toISOString();
+    dateLimit.endDate = new Date(
+      currDate.getFullYear(),
+      currDate.getMonth() + 1,
+      0
+    ).toISOString();
     console.log(
       'startDate',
       new Date(currDate.getFullYear(), currDate.getMonth(), 1).toISOString()
@@ -43,8 +64,9 @@ const SelectMonth = () => {
       'endDate',
       new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0).toISOString()
     );
-
+    console.log(dateLimit);
     setmonth_year(formattedDate);
+    dispatch(setTransactions([1, 2, 3]));
   };
   const increaseDate = () => {
     const actDate = new Date();
@@ -64,7 +86,11 @@ const SelectMonth = () => {
       <div className="cursor-pointer w-8  rounded-full" onClick={reduceDate}>
         <MdChevronLeft />
       </div>
-      <div className=" flex-1  text-center ">{month_year}</div>
+      <div className=" flex-1  text-center ">
+        {month_year}
+        {/* {transactionData[1]} */}
+      </div>
+      {/* <div></div> */}
       <div className=" w-4 cursor-pointer " onClick={increaseDate}>
         <MdChevronRight />
       </div>

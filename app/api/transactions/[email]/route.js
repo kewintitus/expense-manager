@@ -21,7 +21,7 @@ const getUserTransactions = async (req, { params }) => {
       console.log(params);
 
       if (fromDate && toDate) {
-        console.log('HOooo');
+        console.log('Getting monthly user transactions');
         const userMonthlyTransactions = await Transaction.aggregate([
           {
             $match: {
