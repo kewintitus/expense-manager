@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 const AddExpense = () => {
   const paths = [
     { page: 'Home', path: '/' },
-    { page: 'Create Expense', path: '/' },
+    { page: 'Create Transaction', path: '/addexpense' },
   ];
 
   const { data: session, status } = useSession();
@@ -35,6 +35,7 @@ const AddExpense = () => {
   return (
     <div className="px-6">
       <BreadCrumb paths={paths} />
+      <div className="text-lg my-2">Add New Transaction</div>
       <div className="mb-3">
         <h5 className="text-[#8C8C8C] text-sm">Select Transaction Type</h5>
         <SelectTransactionType fn={fetchData} />

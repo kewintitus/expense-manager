@@ -40,7 +40,7 @@ const Nav = async () => {
         <NavLink
           icon={<MdAccountBalance size={24} />}
           name="Accounts"
-          href="/"
+          href="/accounts"
         />
         <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/" />
       </div>
