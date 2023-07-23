@@ -6,7 +6,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 const Pagination = () => {
   const pages = [1, 2, 3, 4, 5];
   return (
-    <div className="mx-auto mt-5 mb-2">
+    <div className="justify-self-end mx-auto  mb-2">
       <div className="flex gap-1 h-auto px-1">
         <PaginationItem>
           <FaChevronLeft />

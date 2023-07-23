@@ -5,6 +5,8 @@ import TxnTableBody from './TxnTableBody';
 import Pagination from './Pagination';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useSelector } from 'react-redux';
+import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
 
 const TransactionTable = () => {
   const { data: session, status } = useSession();
@@ -19,14 +21,21 @@ const TransactionTable = () => {
     setTxnData(data.data);
   };
 
+  const data = useSelector(selectTransactionData);
+  const userTransactions = data.transactionReducer.data;
+  console.log('sliceData', userTransactions);
   useEffect(() => {
-    fetchUserTransactions(session);
-  }, [session]);
+    setTxnData(userTransactions || []);
+  }, [userTransactions]);
+
+  // useEffect(() => {
+  //   fetchUserTransactions(session);
+  // }, [session]);
 
   return (
-    <table className="flex flex-col w-full overflow-hidden  gap-1">
+    <table className="flex flex-col w-full  h-full overflow-hidden  gap-1">
       <TxnTableHead type={'spend'} />
-      <div className="flex flex-col gap-1 h-72 overflow-y-scroll ">
+      <div className="flex flex-col flex-1 gap-1 h-full overflow-y-scroll ">
         {txnData.map((data, i) => (
           <TxnTableBody
             key={data._id}
@@ -35,22 +44,8 @@ const TransactionTable = () => {
             type={data.transactionType}
           />
         ))}
-        {/* <TxnTableBody type={'income'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'income'} />
-        <TxnTableBody type={'income'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'income'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} />
-        <TxnTableBody type={'spend'} /> */}
       </div>
+
       <Pagination />
     </table>
   );

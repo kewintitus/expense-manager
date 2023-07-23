@@ -25,23 +25,25 @@ const getUserTransactions = async (req, { params }) => {
         const userMonthlyTransactions = await Transaction.aggregate([
           {
             $match: {
-              user: 'kewintitus@gmail.com',
+              user: params?.email,
             },
           },
           {
             $match: {
               transactionDate: {
-                $gte: new Date('Sun, 04 Jun 2023 14:13:00 GMT'),
-                $lte: new Date('Fri, 01 Sep 2023 13:49:00 GMT'),
+                $gte: new Date(fromDate),
+                // $lte: new Date(toDate).toISOString(),
+                $lte: new Date(toDate),
               },
             },
           },
           {
             $sort: {
-              transactionDate: -1,
+              transactionDate: sortOrder,
             },
           },
         ]);
+        console.log(userMonthlyTransactions);
 
         return new Response(JSON.stringify(userMonthlyTransactions), {
           status: 200,

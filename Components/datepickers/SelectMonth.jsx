@@ -9,12 +9,12 @@ import Calendar from 'react-calendar';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 
-const SelectMonth = () => {
+const SelectMonth = (props) => {
   const [month_year, setmonth_year] = useState('loading...');
   const dispatch = useDispatch();
 
   const transactionData = useSelector(selectTransactionData);
-  console.log('TransactionData', transactionData.trasactionReducer);
+  console.log('TransactionData', transactionData.transactionReducer);
 
   const dateLimit = {
     startDate: new Date(
@@ -56,17 +56,11 @@ const SelectMonth = () => {
       currDate.getMonth() + 1,
       0
     ).toISOString();
-    console.log(
-      'startDate',
-      new Date(currDate.getFullYear(), currDate.getMonth(), 1).toISOString()
-    );
-    console.log(
-      'endDate',
-      new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0).toISOString()
-    );
+
     console.log(dateLimit);
     setmonth_year(formattedDate);
-    dispatch(setTransactions([1, 2, 3]));
+    props.setData(dateLimit.startDate, dateLimit.endDate);
+    // dispatch(setTransactions([1, 2, 3]));
   };
   const increaseDate = () => {
     const actDate = new Date();
@@ -77,6 +71,19 @@ const SelectMonth = () => {
       const formattedDate = currDate.toLocaleString('en-US', options);
       console.log(formattedDate);
       setmonth_year(formattedDate);
+
+      dateLimit.startDate = new Date(
+        currDate.getFullYear(),
+        currDate.getMonth(),
+        1
+      ).toISOString();
+      dateLimit.endDate = new Date(
+        currDate.getFullYear(),
+        currDate.getMonth() + 1,
+        0
+      ).toISOString();
+      // setmonth_year(formattedDate);
+      props.setData(dateLimit.startDate, dateLimit.endDate);
     }
   };
 
