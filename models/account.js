@@ -17,6 +17,9 @@ const AccountSchema = new Schema({
     type: String,
     required: [true, 'Must be logged in to save account'],
   },
+  createdOn: {
+    type: Date,
+  },
 });
 
 const Account = models.Accounts || model('Accounts', AccountSchema);

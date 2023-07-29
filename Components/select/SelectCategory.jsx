@@ -6,7 +6,7 @@ import { MdOutlineFastfood } from 'react-icons/md';
 
 // import { fetchData } from 'next-auth/client/_utils';
 
-const SelectCategory = (props) => {
+const SelectCategory = React.forwardRef((props, ref) => {
   const [catList, setCatList] = useState([]);
 
   useEffect(() => {
@@ -16,14 +16,17 @@ const SelectCategory = (props) => {
     <Select.Root
       onValueChange={(e) => {
         // console.log(e);
-        props.setCategory(e);
+        props.setCategory(ref.current.innerHTML);
+        console.log('cat ref', ref.current);
       }}
+      // ref={ref}
     >
       <Select.Trigger
         className="dark:bg-[#191919] w-32  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm text-sm flex justify-between items-center dark:outline-[#2E2E2E] h-8 px-2 "
         aria-label="category"
+        // ref={ref}
       >
-        <Select.Value placeholder="Select" />
+        <Select.Value ref={ref} placeholder="Select" />
         <Select.Icon>
           <ChevronDownIcon />
         </Select.Icon>
@@ -47,7 +50,7 @@ const SelectCategory = (props) => {
       </Select.Portal>
     </Select.Root>
   );
-};
+});
 
 const SelectItem = React.forwardRef((props, forwardedRef) => {
   return (
@@ -58,9 +61,7 @@ const SelectItem = React.forwardRef((props, forwardedRef) => {
     >
       <div className="flex items-center gap-1 ">
         <Select.Icon>{props.icon}</Select.Icon>
-        <Select.ItemText>
-          <div>{props.children}</div>
-        </Select.ItemText>
+        <Select.ItemText>{props.children}</Select.ItemText>
       </div>
       <Select.ItemIndicator>
         <CheckIcon />

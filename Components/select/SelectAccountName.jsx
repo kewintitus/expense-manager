@@ -2,16 +2,18 @@
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import * as Select from '@radix-ui/react-select';
 import React from 'react';
+import { AiFillBank } from 'react-icons/ai';
 import { MdOutlineFastfood } from 'react-icons/md';
 
 // import { fetchData } from 'next-auth/client/_utils';
 
-const SelectTxnMode = React.forwardRef((props, ref) => {
+const SelectAccountName = React.forwardRef((props, ref) => {
+  console.log(props.data);
   return (
     <Select.Root
       onValueChange={(e) => {
-        props.setTransactionMode(ref.current.innerHTML);
-        console.log(ref.current.innerHTML);
+        console.log('innerHTMl', ref.current.innerHTML);
+        props.setTransactionAccountName(e);
       }}
     >
       <Select.Trigger
@@ -29,11 +31,11 @@ const SelectTxnMode = React.forwardRef((props, ref) => {
             <Select.Group>
               {props.data.map((data) => (
                 <SelectItem
-                  className="flex gap-2 items-center"
-                  value={data.name}
-                  icon={data?.icon}
+                  className="flex gap-2 items-center text-ellipsis"
+                  value={data.accountName}
+                  icon={<AiFillBank />}
                 >
-                  {data.name}
+                  {data.accountName}
                 </SelectItem>
               ))}
             </Select.Group>
@@ -62,4 +64,4 @@ const SelectItem = React.forwardRef((props, forwardedRef) => {
   );
 });
 
-export default SelectTxnMode;
+export default SelectAccountName;

@@ -8,6 +8,12 @@ const createNewTransaction = async (req) => {
     console.log(req.body);
     console.log('INNNNN');
     const body = await req.json();
+
+    if (body.savedata.transactionMode === 'Bank Account') {
+      if (body.savedata.bankAccount === '') {
+        throw new Error('Bank Account Cannot be empty');
+      }
+    }
     const data = await Transaction.create(body.savedata);
     if (body.savedata.transactionType === 'expense') {
       const updateMetrics = await userMetrics.findOneAndUpdate(
@@ -47,7 +53,9 @@ const createNewTransaction = async (req) => {
       JSON.stringify({
         Errormsg: 'Error while saving data',
         error_details:
-          error.errors?.user?.message || error.errors?.transactionDate?.message,
+          error.errors?.user?.message ||
+          error.errors?.transactionDate?.message ||
+          error?.message,
       }),
       {
         status: 500,

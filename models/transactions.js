@@ -17,6 +17,9 @@ const TransactionSchema = new Schema({
     type: String,
     required: [true, 'Transaction must have a transaction mode'],
   },
+  bankAccountName: {
+    type: String,
+  },
   transactionAmount: {
     type: Number,
     required: [true, 'Transaction must have an amount'],

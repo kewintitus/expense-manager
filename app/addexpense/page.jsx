@@ -44,7 +44,7 @@ const AddExpense = () => {
         <CreateTxnForm
           setTxnType={setTxnType}
           txnType={txnType}
-          user={session.user.email}
+          user={session?.user?.email}
         />
       )}
     </div>
