@@ -29,7 +29,7 @@ const SelectAccountName = React.forwardRef((props, ref) => {
         <Select.Content className=" bg-[#F2F2F2] dark:bg-slate-600 dark:text-stone-300 text-sm ">
           <Select.Viewport>
             <Select.Group>
-              {props.data.map((data) => (
+              {props?.data?.bankAccounts?.map((data) => (
                 <SelectItem
                   className="flex gap-2 items-center text-ellipsis"
                   value={data.accountName}

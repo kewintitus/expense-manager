@@ -36,13 +36,17 @@ const Nav = async () => {
       {/* <Link href="/">Home</Link> */}
       <div className="hidden sm:flex items-center gap-2">
         <NavLink icon={<MdHome size={24} />} name="Home" href="/" />
-        <NavLink icon={<MdBarChart size={24} />} name="Analysis" href="/" />
+        <NavLink
+          icon={<MdBarChart size={24} />}
+          name="Analysis"
+          href="/analysis"
+        />
         <NavLink
           icon={<MdAccountBalance size={24} />}
           name="Accounts"
           href="/accounts"
         />
-        <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/" />
+        <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/more" />
       </div>
       <Button className="justify-self-end ml-auto" />
       <AccountPopover>

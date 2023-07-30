@@ -60,6 +60,9 @@ const Test = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3">
+          <div className="md:hidden absolute bottom-28 left-[90%] translate-x-[-50%] z-50">
+            <AddButton>Add</AddButton>
+          </div>
           <div className="flex w-full items-center justify-between ">
             <div className=" font-medium text-lg ">
               Welcome {session?.user?.name}
@@ -77,7 +80,12 @@ const Test = () => {
 
           <div className="flex items-center justify-between my-2">
             <h5>Recent Transactions</h5>
-            <AddButton>Add </AddButton>
+            <div className="flex sm:hidden">
+              <SelectMonth setData={fetchUserTxn} />
+            </div>
+            <div className="hidden md:block ">
+              <AddButton>Add</AddButton>
+            </div>
           </div>
           <div className="hidden sm:block flex-1 ">
             <TransactionTable />

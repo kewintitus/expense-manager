@@ -3,10 +3,12 @@ import CancelBtn from '@/UI/formui/CancelBtn';
 import SubmitBtn from '@/UI/formui/SubmitBtn';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 
 const CreateBankAccountForm = (props) => {
   let accountName, accountAmount;
+  const router = useRouter();
 
   const accountDetails = { accountName, accountAmount };
   const setAccountName = (payload) => {
@@ -31,6 +33,7 @@ const CreateBankAccountForm = (props) => {
           createdOn: new Date(),
         }
       );
+      router.push('/');
     } catch (error) {
       console.log(error);
       alert(error.message);
