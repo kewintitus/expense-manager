@@ -1,3 +1,4 @@
+import Account from '@/models/account';
 import User from '@/models/user';
 import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
@@ -46,6 +47,22 @@ export const authOptions = {
               username: profile.name,
             },
           });
+          await Account.create([
+            {
+              accountName: 'Demo Account',
+              accountType: 'bank',
+              amount: 0,
+              user: profile?.email,
+              createdOn: new Date(),
+            },
+            {
+              accountName: 'cash',
+              accountType: 'cash',
+              amount: 0,
+              user: profile?.email,
+              createdOn: new Date(),
+            },
+          ]);
         }
         return true;
       } catch (error) {

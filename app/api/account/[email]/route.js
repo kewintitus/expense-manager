@@ -51,7 +51,9 @@ const getAccounts = async (req, { params }) => {
   try {
     await connectToDb();
 
-    const userAccounts = await Account.find({ user: params?.email });
+    const userAccounts = await Account.find({
+      $and: [{ user: params?.email }, { accountType: 'bank' }],
+    });
 
     return new Response(JSON.stringify({ data: userAccounts }), {
       status: 200,

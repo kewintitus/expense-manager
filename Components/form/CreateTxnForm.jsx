@@ -108,7 +108,10 @@ const CreateTxnForm = (props) => {
             transactionDate: dateRef.current.value,
             transactionCategory: categoryRef.current.innerHTML,
             transactionMode: txnModeRef.current.innerHTML,
-            bankAccountName: accountNameRef.current.innerHTML,
+            bankAccountName:
+              txnModeRef.current.innerHTML === 'Bank Account'
+                ? accountNameRef?.current?.innerHTML
+                : '',
             transactionAmount: txnAmtRef?.current?.value,
             transactionNote: noteRef.current?.value,
             transactionTags: tagsRef.current.value,
@@ -123,7 +126,7 @@ const CreateTxnForm = (props) => {
       console.log(error);
     }
 
-    console.log(result);
+    // console.log(result);
   };
 
   // const setData = () => {};
