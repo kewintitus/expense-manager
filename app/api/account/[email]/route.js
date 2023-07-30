@@ -51,13 +51,19 @@ const getAccounts = async (req, { params }) => {
   try {
     await connectToDb();
 
-    const userAccounts = await Account.find({
+    const bankAccounts = await Account.find({
       $and: [{ user: params?.email }, { accountType: 'bank' }],
     });
-
-    return new Response(JSON.stringify({ data: userAccounts }), {
-      status: 200,
+    const cashAccount = await Account.find({
+      $and: [{ user: params?.email }, { accountType: 'cash' }],
     });
+
+    return new Response(
+      JSON.stringify({ data: { bankAccounts, cashAccounts: cashAccount } }),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.log(error);
     return new Response(
