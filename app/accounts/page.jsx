@@ -28,7 +28,7 @@ const AccountsPage = () => {
     <div className="px-6">
       <BreadCrumb paths={paths} />
       <div className="text-lg my-2">Accounts</div>
-      <AccountsList />
+      <AccountsList session={session} />
     </div>
   );
 };
