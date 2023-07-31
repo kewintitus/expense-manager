@@ -1,6 +1,7 @@
 import Account from '@/models/account';
 import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
+var ObjectId = require('mongoose');
 
 const createNewAccount = async (req, { params }) => {
   try {
@@ -51,19 +52,29 @@ const getAccounts = async (req, { params }) => {
   try {
     await connectToDb();
 
-    const bankAccounts = await Account.find({
-      $and: [{ user: params?.email }, { accountType: 'bank' }],
-    });
-    const cashAccount = await Account.find({
-      $and: [{ user: params?.email }, { accountType: 'cash' }],
-    });
+    const id = req.nextUrl.searchParams.get('id');
+    console.log(id);
 
-    return new Response(
-      JSON.stringify({ data: { bankAccounts, cashAccounts: cashAccount } }),
-      {
+    if (id) {
+      const userAccount = await Account.findById(id);
+      return new Response(JSON.stringify({ data: userAccount }), {
         status: 200,
-      }
-    );
+      });
+    } else {
+      const bankAccounts = await Account.find({
+        $and: [{ user: params?.email }, { accountType: 'bank' }],
+      });
+      const cashAccount = await Account.find({
+        $and: [{ user: params?.email }, { accountType: 'cash' }],
+      });
+
+      return new Response(
+        JSON.stringify({ data: { bankAccounts, cashAccounts: cashAccount } }),
+        {
+          status: 200,
+        }
+      );
+    }
   } catch (error) {
     console.log(error);
     return new Response(

@@ -1,6 +1,7 @@
 'use client';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { AiFillBank } from 'react-icons/ai';
 import { FaChevronRight, FaMoneyBill } from 'react-icons/fa';
@@ -8,6 +9,7 @@ import { FaChevronRight, FaMoneyBill } from 'react-icons/fa';
 const AccountsList = (props) => {
   const [bankaccounts, setBankAccounts] = useState([]);
   const [cashAccounts, setCashAccounts] = useState([]);
+  const router = useRouter();
 
   const fetchAccountData = async (email) => {
     const allAccounts = await axios.get(
@@ -16,6 +18,10 @@ const AccountsList = (props) => {
     console.log(allAccounts.data.data.cashAccounts);
     setBankAccounts(allAccounts.data.data.bankAccounts);
     setCashAccounts(allAccounts.data.data.cashAccounts);
+  };
+
+  const navigateToEdit = (id) => {
+    router.push(`/accounts/${id}`);
   };
 
   useEffect(() => {
@@ -37,7 +43,13 @@ const AccountsList = (props) => {
           </Link>
         </div>
         {bankaccounts.map((data) => (
-          <div className="flex items-center justify-between w-full  px-3 py-2 bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E] dark:bg-[#242424]">
+          <div
+            key={data?._id}
+            className="flex cursor-pointer items-center justify-between w-full  px-3 py-2 bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E] dark:bg-[#242424]"
+            onClick={() => {
+              navigateToEdit(data?._id);
+            }}
+          >
             <div>{data.accountName}</div>
             <div className="flex items-center gap-4">
               <div>{data.amount}</div>
@@ -62,7 +74,10 @@ const AccountsList = (props) => {
           </Link> */}
         </div>
         {cashAccounts.map((data) => (
-          <div className="flex items-center justify-between w-full  px-3 py-2 bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E] dark:bg-[#242424]">
+          <div
+            key={data?._id}
+            className="flex items-center justify-between w-full  px-3 py-2 bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E] dark:bg-[#242424]"
+          >
             <div>{data.accountName}</div>
             <div className="flex items-center gap-4">
               <div>{data.amount}</div>
