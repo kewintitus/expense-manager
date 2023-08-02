@@ -1,7 +1,8 @@
 import Account from '@/models/account';
 import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
-var ObjectId = require('mongoose');
+import { ObjectId } from 'mongodb';
+// var ObjectId = require('mongoose');
 
 const createNewAccount = async (req, { params }) => {
   try {
@@ -83,4 +84,76 @@ const getAccounts = async (req, { params }) => {
   }
 };
 
-export { createNewAccount as POST, getAccounts as GET };
+const editAccount = async (req, { params }) => {
+  try {
+    await connectToDb();
+    const body = await req.json();
+    console.log(body);
+
+    const existingData = await Account.findById(body.id);
+    console.log('existing', existingData);
+    // if (existingData.accountName === body.data.accountName) {
+    //   console.log('same name');
+
+    // const update = await Account.aggregate([
+    //   {
+    //     $match: {
+    //       _id: new ObjectId(body.id),
+    //     },
+    //   },
+    //   {
+    //     $set: {
+    //       amount: Number(body.data.amount),
+    //     },
+    //   },
+    //   {
+    //     $set: {
+    //       accountName: body.data.accountName,
+    //     },
+    //   },
+    // ]);
+
+    const update = await Account.findByIdAndUpdate(body.id, {
+      $set: { accountName: body.data.accountName, amount: body.data.amount },
+      // $set: { amount: body.data.amount },
+    });
+
+    const toInc = Number(body.data.amount) - Number(existingData.amount);
+    console.log('amt', toInc);
+    const updateBalance = await userMetrics.findOneAndUpdate(
+      {
+        'user.email': params?.email,
+      },
+      { $inc: { balance: toInc } }
+      // { balance: { $inc: toInc } }
+    );
+
+    console.log('found', update);
+    console.log('found', updateBalance);
+    // const updateBalance = await userMetrics.findOneAndUpdate(
+    //   {
+    //     'user.email': params?.email,
+    //   },
+    //   { $inc: Number(body.amount) - Number(existingData.amount) }
+    // );
+    //   const updateBalance = await userMetrics.findOneAndUpdate(
+    //     {
+    //       'user.email': params?.email,
+    //     },
+    //     { $inc: Number(body.amount) - Number(existingData.amount) }
+    //   );
+    // } else if (existingData.amount === body.data.amount) {
+    //   const update = await Account.updateOne(
+    //     { _id: ObjectId(body.id) },
+    //     { accountName: body.data.accountName }
+    //   );
+    // }
+    // console.log('current', updateBalance);
+
+    return new Response(JSON.stringify({ data: body }), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify({ error }), { status: 400 });
+  }
+};
+
+export { createNewAccount as POST, getAccounts as GET, editAccount as PUT };

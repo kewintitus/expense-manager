@@ -98,8 +98,12 @@ const EditAccount = () => {
               </div>
               {isEditable && (
                 <div className="flex gap-2">
-                  <SubmitBtn>Save</SubmitBtn>
-                  <CancelBtn>Cancel</CancelBtn>
+                  <div>
+                    <CancelBtn>Cancel</CancelBtn>
+                  </div>
+                  <div>
+                    <SubmitBtn>Save</SubmitBtn>
+                  </div>
                 </div>
               )}
             </div>
