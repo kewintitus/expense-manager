@@ -25,6 +25,7 @@ const EditAccount = () => {
 
   const router = useRouter();
   const accNameRef = useRef();
+  const accAmt = useRef();
   const params = useParams();
   console.log(params);
 
@@ -46,12 +47,32 @@ const EditAccount = () => {
     }
     getAccount();
   }, [session, status]);
+
+  const submitAccountChanges = async () => {
+    try {
+      const changes = await axios.put(
+        `${process.env.NEXT_PUBLIC_APIURL}/api/account/${session?.user?.email}`,
+        {
+          id: params.id,
+          data: {
+            accountName: accNameRef.current.value,
+            amount: accAmt.current.value,
+          },
+        }
+      );
+      setIsEditable(false);
+      getAccount();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="px-4">
       <BreadCrumb paths={paths} />
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          submitAccountChanges();
         }}
         className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E]  p-2 rounded-md"
       >
@@ -88,7 +109,7 @@ const EditAccount = () => {
                   Account Amount
                 </label>
                 <input
-                  ref={accNameRef}
+                  ref={accAmt}
                   className="h-8 min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
                   type="number"
                   onChange={(e) => {}}
@@ -98,7 +119,12 @@ const EditAccount = () => {
               </div>
               {isEditable && (
                 <div className="flex gap-2">
-                  <div>
+                  <div
+                    onClick={() => {
+                      setIsEditable(false);
+                      getAccount();
+                    }}
+                  >
                     <CancelBtn>Cancel</CancelBtn>
                   </div>
                   <div>

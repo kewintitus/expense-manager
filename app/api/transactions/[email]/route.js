@@ -32,7 +32,7 @@ const getUserTransactions = async (req, { params }) => {
             $match: {
               transactionDate: {
                 $gte: new Date(fromDate),
-                // $lte: new Date(toDate).toISOString(),
+
                 $lte: new Date(toDate),
               },
             },
