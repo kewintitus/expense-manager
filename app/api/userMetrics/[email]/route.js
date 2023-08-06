@@ -8,6 +8,8 @@ import { connectToDb } from '@/utils/database';
 export const GET = async (req, { params }) => {
   //   console.log('request', req);
   //   const { email } = await req.json();
+  const fromDate = req.nextUrl.searchParams.get('fromDate');
+  const toDate = req.nextUrl.searchParams.get('toDate');
   try {
     await connectToDb();
     console.log(params);
