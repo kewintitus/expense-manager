@@ -1,32 +1,63 @@
 'use client';
+import { setTransactions } from '@/app/redux/slices/transactionSlice';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 const AnalysisSelectMonth = (props) => {
-  const [month_year, setmonth_year] = useState('loading...');
+  const [month_year, setmonth_year] = useState(null);
+  const dispatch = useDispatch();
 
-  const dateLimit = {
-    startDate: new Date(
-      new Date(month_year).getFullYear(),
-      new Date(month_year).getMonth(),
-      1
-    ),
-    endDate: new Date(
-      new Date(month_year).getFullYear(),
-      new Date(month_year).getMonth() - 1,
-      0
-    ),
+  let dateLimit;
+  dateLimit = {
+    startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+    endDate: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
   };
-  useEffect(() => {
-    const setDate = () => {
-      const date = new Date();
-      const options = { month: 'long', year: 'numeric' };
-      const formattedDate = date.toLocaleString('en-US', options);
-      console.log(formattedDate);
-      return formattedDate;
+  console.log('init', dateLimit);
+
+  const setTransactionMetrics = async (startDate, endDate) => {
+    console.log('inasync', dateLimit);
+    const transactionMetrics = await axios.get(
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/transactionMetrics/${props?.sessionEmail}?fromDate=${startDate}&toDate=${endDate}`
+    );
+    console.log('axios data', transactionMetrics.data);
+    dispatch(setTransactions(transactionMetrics.data));
+  };
+
+  const setDate = () => {
+    const date = new Date();
+    const options = { month: 'long', year: 'numeric' };
+    const formattedDate = date.toLocaleString('en-US', options);
+    console.log(formattedDate);
+
+    dateLimit = {
+      startDate: new Date(
+        new Date(formattedDate).getFullYear(),
+        new Date(formattedDate).getMonth(),
+        1
+      ),
+      endDate: new Date(
+        new Date(formattedDate).getFullYear(),
+        new Date(formattedDate).getMonth() + 1,
+        0
+      ),
     };
+    console.log('inital set', dateLimit);
+
+    return formattedDate;
+  };
+
+  useEffect(() => {
+    const stDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const edDate = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
+      0
+    );
     setmonth_year(setDate());
-  }, []);
+    setTransactionMetrics(stDate, edDate);
+  }, [props.sessionEmail]);
 
   const reduceDate = () => {
     const currDate = new Date(month_year);
@@ -47,6 +78,8 @@ const AnalysisSelectMonth = (props) => {
 
     console.log(dateLimit);
     setmonth_year(formattedDate);
+    setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
+
     // props.setData(dateLimit.startDate, dateLimit.endDate);
     // dispatch(setTransactions([1, 2, 3]));
   };
@@ -74,6 +107,9 @@ const AnalysisSelectMonth = (props) => {
         currDate.getMonth() + 1,
         0
       ).toISOString();
+      console.log(dateLimit);
+      setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
+
       // setmonth_year(formattedDate);
       //   props.setData(dateLimit.startDate, dateLimit.endDate);
     }

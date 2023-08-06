@@ -1,7 +1,17 @@
+'use client';
+import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
 import React from 'react';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 const AnalysisStatusCards = () => {
+  const data = useSelector(selectTransactionData);
+  console.log('inCard', data?.transactionReducer);
+  const metrics = data?.transactionReducer;
+  const expense = metrics && metrics?.find((item) => item._id === 'expense');
+  const income = metrics && metrics?.find((item) => item._id === 'income');
+  console.log('expense', expense);
+  //   const [expense, income] = data?.transactionReducer;
   return (
     <div className="w-full text-white">
       <div className="flex flex-row md:flex-row items-start w-full gap-2 md:items-center">
@@ -11,7 +21,7 @@ const AnalysisStatusCards = () => {
           </div>
           <div className="flex flex-col px-1">
             <div className="font-normal text-sm">Spending</div>
-            <div className="font-bold">Rs 1213</div>
+            <div className="font-bold">Rs {expense?.sum || 0}</div>
           </div>
         </div>
         <div className="w-1/2 md:w-40 h-16 px-1 bg-[#1B5C11] rounded-sm outline outline-1 outline-[#62925B] flex items-center">
@@ -20,7 +30,7 @@ const AnalysisStatusCards = () => {
           </div>
           <div className="flex flex-col px-1">
             <div className="font-normal text-sm">Income</div>
-            <div className="font-bold">Rs 1213</div>
+            <div className="font-bold">Rs {income?.sum || 0}</div>
           </div>
         </div>
         <div className="hidden md:flex w-1/2 md:w-40 h-16 px-1 bg-[#231D12] rounded-sm outline outline-1 outline-[#524326]  items-center">
@@ -29,7 +39,9 @@ const AnalysisStatusCards = () => {
           </div>
           <div className="flex flex-col px-1">
             <div className="font-normal text-sm">Balance</div>
-            <div className="font-bold">Rs 1213</div>
+            <div className="font-bold">
+              Rs {income?.sum - expense?.sum || 0}
+            </div>
           </div>
         </div>
       </div>

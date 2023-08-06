@@ -7,6 +7,7 @@ import BreadCrumb from '@/Components/breadcrumb/BreadCrumb';
 import AnalysisStatusCards from '@/Components/cards/AnalysisStatusCards';
 import SelectMonth from '@/Components/datepickers/SelectMonth';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const Analysis = () => {
@@ -15,7 +16,20 @@ const Analysis = () => {
     { page: 'Analysis', path: '/analysis' },
   ];
 
-  const [analysisType, setAnalysisType] = useState(null);
+  const { data: session, status } = useSession();
+  const [userSession, setUserSession] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      setUserSession(null);
+      router.push('/');
+    } else if (status === 'authenticated') {
+      setUserSession(session);
+    }
+  }, [session, status]);
+
+  const [analysisType, setAnalysisType] = useState('monthly');
   return (
     <div className="px-4  h-full ">
       <BreadCrumb paths={paths} />
@@ -27,9 +41,9 @@ const Analysis = () => {
           <h4>Monthly Analysis</h4>
           <div>
             {analysisType === 'monthly' ? (
-              <AnalysisSelectMonth />
+              <AnalysisSelectMonth sessionEmail={session?.user?.email} />
             ) : (
-              <AnalysisSelectYear />
+              <AnalysisSelectYear sessionEmail={session?.user?.email} />
             )}
           </div>
         </div>

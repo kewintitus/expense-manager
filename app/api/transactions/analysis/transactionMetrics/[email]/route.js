@@ -4,6 +4,7 @@ import { connectToDb } from '@/utils/database';
 const getTransactionMetrics = async (req, { params }) => {
   const fromDate = req.nextUrl.searchParams.get('fromDate');
   const toDate = req.nextUrl.searchParams.get('toDate');
+  console.log(new Date(fromDate), new Date(toDate));
   const aggregation = [
     {
       $match: {
