@@ -1,14 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 
-const AnalysisTypeSelector = () => {
+const AnalysisTypeSelector = (props) => {
   const [isMontly, setIsMonthly] = useState(true);
 
   const monthBtnHandler = () => {
     setIsMonthly(true);
+    props.setAnalysisType('monthly');
   };
   const yearBtnHandler = () => {
     setIsMonthly(false);
+    props.setAnalysisType('yearly');
   };
   return (
     <div className="flex gap-2 ">
