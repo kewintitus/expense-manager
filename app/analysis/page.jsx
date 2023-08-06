@@ -1,6 +1,7 @@
 'use client';
 import AnalysisTypeSelector from '@/Components/AnalysisTypeSelector';
 import AnalysisSelectMonth from '@/Components/analysisTimeRangeComponents/AnalysisSelectMonth';
+import AnalysisSelectYear from '@/Components/analysisTimeRangeComponents/AnalysisSelectYear';
 import BreadCrumb from '@/Components/breadcrumb/BreadCrumb';
 import SelectMonth from '@/Components/datepickers/SelectMonth';
 import { useSession } from 'next-auth/react';
@@ -23,7 +24,8 @@ const Analysis = () => {
         <div className="flex justify-between items-center">
           <h4>Monthly Analysis</h4>
           <div>
-            <AnalysisSelectMonth />
+            {/* <AnalysisSelectMonth /> */}
+            <AnalysisSelectYear />
           </div>
         </div>
       </div>

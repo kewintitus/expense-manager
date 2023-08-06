@@ -54,11 +54,14 @@ const AnalysisSelectMonth = (props) => {
   const increaseDate = () => {
     const actDate = new Date();
     const currDate = new Date(month_year);
-    if (new Date(actDate).getMonth() > new Date(currDate).getMonth()) {
+    if (
+      new Date(actDate).getMonth() > new Date(currDate).getMonth() ||
+      new Date(actDate).getFullYear() > new Date(currDate).getFullYear()
+    ) {
+      console.log('year', actDate.getFullYear());
       const options = { month: 'long', year: 'numeric' };
       currDate.setMonth(currDate.getMonth() + 1);
       const formattedDate = currDate.toLocaleString('en-US', options);
-      console.log(formattedDate);
       setmonth_year(formattedDate);
 
       dateLimit.startDate = new Date(
