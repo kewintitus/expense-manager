@@ -3,6 +3,7 @@ import AnalysisTypeSelector from '@/Components/AnalysisTypeSelector';
 import AnalysisSelectMonth from '@/Components/analysisTimeRangeComponents/AnalysisSelectMonth';
 import AnalysisSelectYear from '@/Components/analysisTimeRangeComponents/AnalysisSelectYear';
 import BreadCrumb from '@/Components/breadcrumb/BreadCrumb';
+import AnalysisStatusCards from '@/Components/cards/AnalysisStatusCards';
 import SelectMonth from '@/Components/datepickers/SelectMonth';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
@@ -30,6 +31,12 @@ const Analysis = () => {
               <AnalysisSelectYear />
             )}
           </div>
+        </div>
+        <div>
+          <h4>General</h4>
+        </div>
+        <div>
+          <AnalysisStatusCards />
         </div>
       </div>
     </div>
