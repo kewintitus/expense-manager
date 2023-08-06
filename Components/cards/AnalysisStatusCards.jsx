@@ -3,7 +3,7 @@ import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
 const AnalysisStatusCards = () => {
   return (
-    <div className="w-full">
+    <div className="w-full text-white">
       <div className="flex flex-row md:flex-row items-start w-full gap-2 md:items-center">
         <div className="w-1/2 md:w-40 h-16 px-1 bg-[#F67070] rounded-sm outline outline-1 outline-[#FFBFBF] flex items-center">
           <div className="h-14 w-14 flex items-center justify-center rounded-full bg-[#FF9494]">

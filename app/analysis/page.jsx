@@ -1,5 +1,6 @@
 'use client';
 import AnalysisTypeSelector from '@/Components/AnalysisTypeSelector';
+import SpendingAnalysis from '@/Components/AnalysisVisualizations/SpendingAnalysis';
 import AnalysisSelectMonth from '@/Components/analysisTimeRangeComponents/AnalysisSelectMonth';
 import AnalysisSelectYear from '@/Components/analysisTimeRangeComponents/AnalysisSelectYear';
 import BreadCrumb from '@/Components/breadcrumb/BreadCrumb';
@@ -21,7 +22,7 @@ const Analysis = () => {
       <div className="w-full flex justify-end">
         <AnalysisTypeSelector setAnalysisType={setAnalysisType} />
       </div>
-      <div className=" outline outline-1 h-[65%] md:h-[75%] outline-slate-300 dark:outline-[#2E2E2E] rounded-md p-2 mt-2">
+      <div className=" outline outline-1 h-[65%] md:h-[85%] outline-slate-300 dark:outline-[#2E2E2E] rounded-md p-2 mt-2 overflow-y-auto ">
         <div className="flex justify-between items-center">
           <h4>Monthly Analysis</h4>
           <div>
@@ -38,6 +39,7 @@ const Analysis = () => {
         <div>
           <AnalysisStatusCards />
         </div>
+        <SpendingAnalysis />
       </div>
     </div>
   );

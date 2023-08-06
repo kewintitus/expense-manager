@@ -15,10 +15,10 @@ const AnalysisTypeSelector = (props) => {
   return (
     <div className="flex gap-2 ">
       <button
-        className={`px-4 py-2 rounded-sm outline outline-1 cursor-pointer transition-all delay-150 ${
+        className={`px-4 py-2 rounded-sm outline outline-1 cursor-pointer  transition-all delay-150 ${
           isMontly
-            ? 'bg-[#2FB6D4] outline-[#8eddee]'
-            : 'bg-inherit  outline-[#8c8c8c]'
+            ? 'bg-[#2FB6D4] outline-[#8eddee] text-white font-bold'
+            : '  outline-[#8c8c8c] '
         } `}
         onClick={monthBtnHandler}
       >
@@ -27,7 +27,7 @@ const AnalysisTypeSelector = (props) => {
       <button
         className={`px-4 py-2 rounded-sm outline outline-1 cursor-pointer transition-all delay-150 ${
           !isMontly
-            ? 'bg-[#2FB6D4] outline-[#8eddee]'
+            ? 'bg-[#2FB6D4] outline-[#8eddee] text-white font-bold'
             : 'bg-inherit  outline-[#8c8c8c]'
         } `}
         onClick={yearBtnHandler}
