@@ -1,12 +1,25 @@
 'use client';
+import { setTransactions } from '@/app/redux/slices/transactionSlice';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
-const AnalysisSelectYear = () => {
+const AnalysisSelectYear = (props) => {
   const [month_year, setmonth_year] = useState('loading...');
   const dateLimit = {
     startDate: new Date(new Date(month_year).getFullYear(), 0, 1),
     endDate: new Date(new Date(month_year).getFullYear(), 11, 31),
+  };
+  const dispatch = useDispatch();
+
+  const setTransactionMetrics = async (startDate, endDate) => {
+    console.log('inasync', dateLimit);
+    const transactionMetrics = await axios.get(
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/transactionMetrics/${props?.sessionEmail}?fromDate=${startDate}&toDate=${endDate}`
+    );
+    console.log('axios data', transactionMetrics.data);
+    dispatch(setTransactions(transactionMetrics.data));
   };
   useEffect(() => {
     const setDate = () => {
@@ -14,10 +27,15 @@ const AnalysisSelectYear = () => {
       const options = { year: 'numeric' };
       const formattedDate = date.toLocaleString('en-US', options);
       console.log(formattedDate);
+
       return formattedDate;
     };
+    const stDate = new Date(new Date().getFullYear(), 0, 1);
+    const edDate = new Date(new Date().getFullYear(), 11, 31);
+    setTransactionMetrics(stDate, edDate);
+
     setmonth_year(setDate());
-  }, []);
+  }, [props.sessionEmail]);
   //   console.log(dateLimit);
   const increaseDate = () => {
     const actDate = new Date();
@@ -28,43 +46,35 @@ const AnalysisSelectYear = () => {
       const formattedDate = currDate.toLocaleString('en-US', options);
       setmonth_year(formattedDate);
 
-      dateLimit.startDate = new Date(
-        new Date(formattedDate).getFullYear(),
-        0,
-        1
-      );
-      dateLimit.endDate = new Date(
-        new Date(formattedDate).getFullYear(),
-        11,
-        31
-      );
+      dateLimit.startDate = new Date(currDate.getFullYear(), 0, 1);
+      dateLimit.endDate = new Date(currDate.getFullYear(), 11, 31);
       console.log(dateLimit);
+      setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
     } else {
       console.log('brrr');
+      return;
     }
   };
   const reduceDate = () => {
     const actDate = new Date();
     const currDate = new Date(month_year);
-    if (actDate.getFullYear() >= currDate.getFullYear()) {
-      const options = { year: 'numeric' };
-      currDate.setFullYear(currDate.getFullYear() - 1);
-
-      const formattedDate = currDate.toLocaleString('en-US', options);
-      setmonth_year(formattedDate);
-      console.log('formattedDate', formattedDate);
-      dateLimit.startDate = new Date(
-        new Date(formattedDate).getFullYear(),
-        0,
-        1
-      );
-      dateLimit.endDate = new Date(
-        new Date(formattedDate).getFullYear(),
-        11,
-        31
-      );
-      console.log(dateLimit);
+    if (actDate.getFullYear() < currDate.getFullYear()) {
+      return;
     }
+    const options = { year: 'numeric' };
+    currDate.setFullYear(currDate.getFullYear() - 1);
+
+    const formattedDate = currDate.toLocaleString('en-US', options);
+    // setmonth_year(formattedDate);
+    console.log('formattedDate', formattedDate);
+    dateLimit.startDate = new Date(currDate.getFullYear(), 0, 1);
+    dateLimit.endDate = new Date(currDate.getFullYear(), 11, 31);
+    setmonth_year(formattedDate);
+
+    setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
+
+    console.log(dateLimit);
+
     console.log(actDate.getFullYear(), currDate.getFullYear());
   };
 
