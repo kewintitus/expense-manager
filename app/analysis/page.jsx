@@ -18,6 +18,7 @@ const Analysis = () => {
 
   const { data: session, status } = useSession();
   const [userSession, setUserSession] = useState(null);
+  const [dateRange, setDateRange] = useState({});
   const router = useRouter();
 
   useEffect(() => {
@@ -41,7 +42,10 @@ const Analysis = () => {
           <h4>Monthly Analysis</h4>
           <div>
             {analysisType === 'monthly' ? (
-              <AnalysisSelectMonth sessionEmail={session?.user?.email} />
+              <AnalysisSelectMonth
+                setDateRange={setDateRange}
+                sessionEmail={session?.user?.email}
+              />
             ) : (
               <AnalysisSelectYear sessionEmail={session?.user?.email} />
             )}

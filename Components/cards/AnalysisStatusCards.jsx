@@ -7,9 +7,13 @@ import { useSelector } from 'react-redux';
 const AnalysisStatusCards = () => {
   const data = useSelector(selectTransactionData);
   console.log('inCard', data?.transactionReducer);
-  const metrics = data?.transactionReducer;
-  const expense = metrics && metrics?.find((item) => item._id === 'expense');
-  const income = metrics && metrics?.find((item) => item._id === 'income');
+  let metrics = [];
+  metrics = data?.transactionReducer;
+  console.log(metrics);
+  let expense, income;
+
+  expense = metrics && metrics?.find((item) => item._id === 'expense');
+  income = metrics && metrics?.find((item) => item._id === 'income');
   console.log('expense', expense);
   //   const [expense, income] = data?.transactionReducer;
   return (
