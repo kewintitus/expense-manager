@@ -1,19 +1,24 @@
 'use client';
 import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 
 const AnalysisStatusCards = () => {
   const data = useSelector(selectTransactionData);
   console.log('inCard', data?.transactionReducer);
+
   let metrics = [];
-  metrics = data?.transactionReducer;
+  metrics = metrics.length != 0 && data?.transactionReducer;
   console.log(metrics);
   let expense, income;
 
-  expense = metrics && metrics?.find((item) => item._id === 'expense');
-  income = metrics && metrics?.find((item) => item._id === 'income');
+  expense =
+    data?.transactionReducer[0] &&
+    data?.transactionReducer?.find((item) => item._id === 'expense');
+  income =
+    data?.transactionReducer[0] &&
+    data?.transactionReducer?.find((item) => item._id === 'income');
   console.log('expense', expense);
   //   const [expense, income] = data?.transactionReducer;
   return (
