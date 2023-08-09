@@ -18,7 +18,7 @@ const Analysis = () => {
 
   const { data: session, status } = useSession();
   const [userSession, setUserSession] = useState(null);
-  const [dateRange, setDateRange] = useState({});
+  const [dateRange, setDateRange] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const Analysis = () => {
       setUserSession(session);
     }
   }, [session, status]);
+  console.log('inpage', dateRange);
 
   const [analysisType, setAnalysisType] = useState('monthly');
   return (
@@ -58,6 +59,7 @@ const Analysis = () => {
           <AnalysisStatusCards />
         </div>
         <SpendingAnalysis />
+        {/* <div>{`${dateRange && dateRange.startDate}`}</div> */}
       </div>
     </div>
   );

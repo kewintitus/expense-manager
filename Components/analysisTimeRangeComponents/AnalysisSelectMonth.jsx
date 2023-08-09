@@ -57,6 +57,7 @@ const AnalysisSelectMonth = (props) => {
     );
     setmonth_year(setDate());
     setTransactionMetrics(stDate, edDate);
+    props.setDateRange({ startDate: stDate, endDate: edDate });
   }, [props.sessionEmail]);
 
   const reduceDate = () => {
@@ -79,6 +80,7 @@ const AnalysisSelectMonth = (props) => {
     console.log(dateLimit);
     setmonth_year(formattedDate);
     setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
+    props.setDateRange(dateLimit);
 
     // props.setData(dateLimit.startDate, dateLimit.endDate);
     // dispatch(setTransactions([1, 2, 3]));
@@ -109,7 +111,7 @@ const AnalysisSelectMonth = (props) => {
       ).toISOString();
       console.log(dateLimit);
       setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
-
+      props.setDateRange(dateLimit);
       // setmonth_year(formattedDate);
       //   props.setData(dateLimit.startDate, dateLimit.endDate);
     }
