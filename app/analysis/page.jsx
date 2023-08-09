@@ -55,7 +55,7 @@ const Analysis = () => {
         <div>
           <h4>General</h4>
         </div>
-        <div>
+        <div className="w-full">
           <AnalysisStatusCards />
         </div>
         <SpendingAnalysis />

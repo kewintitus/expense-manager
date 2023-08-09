@@ -1,52 +1,37 @@
-'use client';
 import React from 'react';
-import { Pie, ResponsiveContainer, Tooltip } from 'recharts';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const data = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.9)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)',
+        'rgba(255, 159, 64, 0.8)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 const PieChart = () => {
-  const data01 = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-    { name: 'Group E', value: 278 },
-    { name: 'Group F', value: 189 },
-  ];
-
-  const data02 = [
-    { name: 'Group A', value: 2400 },
-    { name: 'Group B', value: 4567 },
-    { name: 'Group C', value: 1398 },
-    { name: 'Group D', value: 9800 },
-    { name: 'Group E', value: 3908 },
-    { name: 'Group F', value: 4800 },
-  ];
-
-  return (
-    // <ResponsiveContainer width={1000} height={1000}>
-    <PieChart width={400} height={400}>
-      <Pie
-        dataKey="value"
-        isAnimationActive={false}
-        data={data01}
-        cx="50%"
-        cy="50%"
-        outerRadius={80}
-        fill="#8884d8"
-        label
-      />
-      <Pie
-        dataKey="value"
-        data={data02}
-        cx={500}
-        cy={200}
-        innerRadius={40}
-        outerRadius={80}
-        fill="#82ca9d"
-      />
-      <Tooltip />
-    </PieChart>
-    // </ResponsiveContainer>
-  );
+  return <Pie data={data}></Pie>;
 };
 
 export default PieChart;
