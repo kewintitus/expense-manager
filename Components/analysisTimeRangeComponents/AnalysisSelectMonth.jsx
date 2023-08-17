@@ -58,6 +58,7 @@ const AnalysisSelectMonth = (props) => {
     setmonth_year(setDate());
     setTransactionMetrics(stDate, edDate);
     props.setDateRange({ startDate: stDate, endDate: edDate });
+    props.setRangeType('month');
   }, [props.sessionEmail]);
 
   const reduceDate = () => {

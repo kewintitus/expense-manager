@@ -2,10 +2,11 @@
 import React, { PureComponent } from 'react';
 import PieChart from '../Charts/PieChart';
 import LineChart from '../Charts/LineChart';
+import SpendAccountsPie from '../Charts/SpendingAnalysisCharts/SpendAccountsPie';
 
-const SpendingAnalysis = () => {
+const SpendingAnalysis = (props) => {
   return (
-    <div className=" sm:p-2 mt-2 dark:bg-[#1B1B1B] dark:text-white">
+    <div className=" sm:p-2 mt-2 bg-[#f3f2ef] rounded-sm dark:bg-[#1B1B1B] dark:text-white">
       <h5>Spending Analysis</h5>
       <div className="flex flex-col sm:flex-row h-[56rem] sm:min-h-[48rem] p-2">
         <div className=" w-full sm:w-1/4 sm:min-w-[250px] ">
@@ -13,7 +14,8 @@ const SpendingAnalysis = () => {
             <h6 className="text-gray-500 text-sm">Spending by Accounts</h6>
             <div className="w-full h-full z-50 p-4 ">
               {' '}
-              <PieChart />{' '}
+              {/* <PieChart />{' '} */}
+              <SpendAccountsPie dateRange={props.dateRange} />
             </div>
           </div>
           <div className="w-full h-1/2  p-2">

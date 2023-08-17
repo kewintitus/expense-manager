@@ -48,8 +48,9 @@ export const data = {
     },
   ],
 };
-const PieChart = () => {
+const SpendAccountsPie = (props) => {
+  console.log('In PIE CHART', props.dateRange);
   return <Pie options={options} data={data}></Pie>;
 };
 
-export default PieChart;
+export default SpendAccountsPie;

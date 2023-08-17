@@ -33,7 +33,7 @@ const AnalysisSelectYear = (props) => {
     const stDate = new Date(new Date().getFullYear(), 0, 1);
     const edDate = new Date(new Date().getFullYear(), 11, 31);
     setTransactionMetrics(stDate, edDate);
-
+    props.setDateRange({ startDate: stDate, endDate: edDate });
     setmonth_year(setDate());
   }, [props.sessionEmail]);
   //   console.log(dateLimit);
@@ -50,6 +50,7 @@ const AnalysisSelectYear = (props) => {
       dateLimit.endDate = new Date(currDate.getFullYear(), 11, 31);
       console.log(dateLimit);
       setTransactionMetrics(dateLimit.startDate, dateLimit.endDate);
+      props.setDateRange(dateLimit);
     } else {
       console.log('brrr');
       return;
@@ -76,6 +77,7 @@ const AnalysisSelectYear = (props) => {
     console.log(dateLimit);
 
     console.log(actDate.getFullYear(), currDate.getFullYear());
+    props.setDateRange(dateLimit);
   };
 
   return (
