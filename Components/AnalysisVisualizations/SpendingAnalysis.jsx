@@ -4,7 +4,8 @@ import PieChart from '../Charts/PieChart';
 import LineChart from '../Charts/LineChart';
 import SpendAccountsPie from '../Charts/SpendingAnalysisCharts/SpendAccountsPie';
 
-const SpendingAnalysis = (props) => {
+const SpendingAnalysis = ({ startDate, endDate, sessionEmail }) => {
+  console.log('OOOOOOO', startDate, endDate);
   return (
     <div className=" sm:p-2 mt-2 bg-[#f3f2ef] rounded-sm dark:bg-[#1B1B1B] dark:text-white">
       <h5>Spending Analysis</h5>
@@ -15,7 +16,11 @@ const SpendingAnalysis = (props) => {
             <div className="w-full h-full z-50 p-4 ">
               {' '}
               {/* <PieChart />{' '} */}
-              <SpendAccountsPie dateRange={props.dateRange} />
+              <SpendAccountsPie
+                startDate={startDate}
+                endDate={endDate}
+                sessionEmail={sessionEmail}
+              />
             </div>
           </div>
           <div className="w-full h-1/2  p-2">

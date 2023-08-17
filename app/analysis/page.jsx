@@ -64,7 +64,11 @@ const Analysis = () => {
         <div className="w-full">
           <AnalysisStatusCards />
         </div>
-        <SpendingAnalysis dateRange={dateRange} />
+        <SpendingAnalysis
+          startDate={dateRange?.startDate}
+          endDate={dateRange?.endDate}
+          sessionEmail={session?.user?.email}
+        />
         {/* <div>{`${dateRange && dateRange.startDate}`}</div> */}
       </div>
     </div>
