@@ -78,11 +78,11 @@ const SpendingCategoryPie = ({ startDate, endDate, sessionEmail }) => {
   }, [startDate, endDate, sessionEmail]);
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full flex justify-center items-center ">
       {dataAvailability ? (
         <Pie options={options} data={data}></Pie>
       ) : (
-        'Data Not Avaliable'
+        <div className="w-full h-full ">Data Not Avaliable</div>
       )}
     </div>
   );

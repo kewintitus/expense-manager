@@ -23,12 +23,25 @@ ChartJS.register(
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useTheme } from 'next-themes';
 
 const SpendTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
   const [fetchedData, setFetchedData] = useState([]);
   const [dataAvailability, setDataAvailability] = useState(true);
-
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const options = {
+    scales: {
+      y: {
+        grid: {
+          color: resolvedTheme === 'light' ? '#dee2e6' : '#868e96', // Change x-axis grid color here
+        },
+      },
+      //   x: {
+      //     grid: {
+      //       color: resolvedTheme === 'light' ? '#dee2e6' : '#868e96',
+      //     },
+      //   },
+    },
     responsive: true,
     plugins: {
       legend: {
