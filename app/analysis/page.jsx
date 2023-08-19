@@ -68,6 +68,7 @@ const Analysis = () => {
           startDate={dateRange?.startDate}
           endDate={dateRange?.endDate}
           sessionEmail={session?.user?.email}
+          analysisType={analysisType}
         />
         {/* <div>{`${dateRange && dateRange.startDate}`}</div> */}
       </div>

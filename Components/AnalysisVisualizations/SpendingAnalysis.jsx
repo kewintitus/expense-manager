@@ -6,7 +6,12 @@ import SpendAccountsPie from '../Charts/SpendingAnalysisCharts/SpendAccountsPie'
 import SpendingCategoryPie from '../Charts/SpendingAnalysisCharts/SpendingCategoryPie';
 import SpendTrend from '../Charts/SpendingAnalysisCharts/SpendTrend';
 
-const SpendingAnalysis = ({ startDate, endDate, sessionEmail }) => {
+const SpendingAnalysis = ({
+  startDate,
+  endDate,
+  sessionEmail,
+  analysisType,
+}) => {
   console.log('OOOOOOO', startDate, endDate);
   return (
     <div className=" sm:p-2 mt-2 bg-[#f3f2ef] rounded-sm dark:bg-[#1B1B1B] dark:text-white">
@@ -41,7 +46,12 @@ const SpendingAnalysis = ({ startDate, endDate, sessionEmail }) => {
           <h6>Spending Trend</h6>
           <div className="flex items-center sm:p-2 w-full h-full">
             {/* <LineChart /> */}
-            <SpendTrend />
+            <SpendTrend
+              startDate={startDate}
+              endDate={endDate}
+              sessionEmail={sessionEmail}
+              analysisType={analysisType}
+            />
           </div>
         </div>
       </div>
