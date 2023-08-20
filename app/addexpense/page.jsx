@@ -33,7 +33,7 @@ const AddExpense = () => {
     setTxnType(payload);
   };
   return (
-    <div className="px-6 flex flex-col overflow-y-scroll h-full pb-44 sm:pb-0">
+    <div className="px-6 flex flex-col overflow-y-scroll h-full pb-48 sm:pb-0">
       <BreadCrumb paths={paths} />
       <div className="text-lg my-2">Add New Transaction</div>
       <div className="mb-3">
