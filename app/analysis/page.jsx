@@ -1,5 +1,6 @@
 'use client';
 import AnalysisTypeSelector from '@/Components/AnalysisTypeSelector';
+import IncomeAnalysis from '@/Components/AnalysisVisualizations/IncomeAnalysis';
 import SpendingAnalysis from '@/Components/AnalysisVisualizations/SpendingAnalysis';
 import AnalysisSelectMonth from '@/Components/analysisTimeRangeComponents/AnalysisSelectMonth';
 import AnalysisSelectYear from '@/Components/analysisTimeRangeComponents/AnalysisSelectYear';
@@ -65,6 +66,12 @@ const Analysis = () => {
           <AnalysisStatusCards />
         </div>
         <SpendingAnalysis
+          startDate={dateRange?.startDate}
+          endDate={dateRange?.endDate}
+          sessionEmail={session?.user?.email}
+          analysisType={analysisType}
+        />
+        <IncomeAnalysis
           startDate={dateRange?.startDate}
           endDate={dateRange?.endDate}
           sessionEmail={session?.user?.email}

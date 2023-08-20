@@ -25,7 +25,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useTheme } from 'next-themes';
 
-const SpendTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
+const IncomeTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
   const [fetchedData, setFetchedData] = useState([]);
   const [dataAvailability, setDataAvailability] = useState(true);
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -75,7 +75,7 @@ const SpendTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
   };
   const getSpendTrend = async () => {
     const data = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/transaction/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=expense&aggrType=${analysisType}`
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/transaction/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=income&aggrType=${analysisType}`
     );
     if (analysisType === 'monthly') {
       const date = new Date(endDate).getDate();
@@ -89,7 +89,7 @@ const SpendTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
       data.data.forEach((el) => {
         valueArr[Number(el.index - 1)] = el.value;
       });
-      console.log('SpendTrend', labelArr, valueArr);
+      console.log('IncomeTrend', labelArr, valueArr);
       setFetchedData({ labels: labelArr, values: valueArr });
     } else if (analysisType === 'yearly') {
       const labelArr = [
@@ -122,4 +122,4 @@ const SpendTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
   return <Line options={options} data={data} />;
 };
 
-export default SpendTrend;
+export default IncomeTrend;

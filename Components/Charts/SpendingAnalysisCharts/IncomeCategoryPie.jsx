@@ -6,13 +6,12 @@ import axios from 'axios';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
+const IncomeCategoryPie = ({ startDate, endDate, sessionEmail }) => {
   const [fetchedData, setFetchedData] = useState([]);
   const [dataAvailability, setDataAvailability] = useState(true);
 
   const options = {
     responsive: true,
-    maintainAspectRatio: 'false',
     plugins: {
       legend: {
         position: 'bottom',
@@ -49,7 +48,6 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
           'rgba(75, 192, 192, 0.8)',
           'rgba(153, 102, 255, 0.8)',
           'rgba(255, 159, 64, 0.8)',
-          'rgba(22, 159, 64, 0.8)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -58,7 +56,6 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
           'rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
-          'rgba(22, 159, 64, 01)',
         ],
         borderWidth: 1,
       },
@@ -68,11 +65,11 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
   console.log('In PIE CHART', startDate, endDate, sessionEmail);
   const getSpendAccountData = async () => {
     const data = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/accounts/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=expense`
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/category/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=income`
     );
     console.log('inPIE', data.data);
     setFetchedData(data.data);
-    if (data.data.length === 0) {
+    if (data.data.length == 0) {
       setDataAvailability(false);
     } else setDataAvailability(true);
   };
@@ -81,14 +78,14 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
   }, [startDate, endDate, sessionEmail]);
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full flex justify-center items-center ">
       {dataAvailability ? (
         <Pie options={options} data={data}></Pie>
       ) : (
-        'Data Not Avaliable'
+        <div className="w-full h-full ">Data Not Avaliable</div>
       )}
     </div>
   );
 };
 
-export default SpendAccountsPie;
+export default IncomeCategoryPie;

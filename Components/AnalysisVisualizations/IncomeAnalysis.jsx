@@ -5,13 +5,11 @@ import LineChart from '../Charts/LineChart';
 import SpendAccountsPie from '../Charts/SpendingAnalysisCharts/SpendAccountsPie';
 import SpendingCategoryPie from '../Charts/SpendingAnalysisCharts/SpendingCategoryPie';
 import SpendTrend from '../Charts/SpendingAnalysisCharts/SpendTrend';
+import IncomeAccountsPie from '../Charts/SpendingAnalysisCharts/IncomeAccountsPie';
+import IncomeCategoryPie from '../Charts/SpendingAnalysisCharts/IncomeCategoryPie';
+import IncomeTrend from '../Charts/SpendingAnalysisCharts/IncomeTrend';
 
-const SpendingAnalysis = ({
-  startDate,
-  endDate,
-  sessionEmail,
-  analysisType,
-}) => {
+const IncomeAnalysis = ({ startDate, endDate, sessionEmail, analysisType }) => {
   console.log('OOOOOOO', startDate, endDate);
   return (
     <div className=" sm:p-2 mt-4 bg-[#f3f2ef] rounded-sm dark:bg-[#1B1B1B] dark:text-white">
@@ -23,7 +21,7 @@ const SpendingAnalysis = ({
             <div className="w-full h-full z-50 p-4 ">
               {' '}
               {/* <PieChart />{' '} */}
-              <SpendAccountsPie
+              <IncomeAccountsPie
                 startDate={startDate}
                 endDate={endDate}
                 sessionEmail={sessionEmail}
@@ -33,7 +31,7 @@ const SpendingAnalysis = ({
           <div className="w-full h-1/2  p-2 ">
             <h6 className="text-gray-500 text-sm">Spending by Category</h6>
             <div className="w-full h-full z-50 p-4">
-              <SpendingCategoryPie
+              <IncomeCategoryPie
                 startDate={startDate}
                 endDate={endDate}
                 sessionEmail={sessionEmail}
@@ -46,7 +44,7 @@ const SpendingAnalysis = ({
           <h6 className="text-gray-500 text-sm">Spending Trend</h6>
           <div className="flex items-center sm:p-2 w-full h-full">
             {/* <LineChart /> */}
-            <SpendTrend
+            <IncomeTrend
               startDate={startDate}
               endDate={endDate}
               sessionEmail={sessionEmail}
@@ -59,4 +57,4 @@ const SpendingAnalysis = ({
   );
 };
 
-export default SpendingAnalysis;
+export default IncomeAnalysis;

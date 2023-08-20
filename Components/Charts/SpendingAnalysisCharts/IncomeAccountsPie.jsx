@@ -6,7 +6,7 @@ import axios from 'axios';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
+const IncomeAccountsPie = ({ startDate, endDate, sessionEmail }) => {
   const [fetchedData, setFetchedData] = useState([]);
   const [dataAvailability, setDataAvailability] = useState(true);
 
@@ -68,7 +68,7 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
   console.log('In PIE CHART', startDate, endDate, sessionEmail);
   const getSpendAccountData = async () => {
     const data = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/accounts/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=expense`
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/analysis/accounts/${sessionEmail}?fromDate=${startDate}&toDate=${endDate}&txnType=income`
     );
     console.log('inPIE', data.data);
     setFetchedData(data.data);
@@ -91,4 +91,4 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
   );
 };
 
-export default SpendAccountsPie;
+export default IncomeAccountsPie;
