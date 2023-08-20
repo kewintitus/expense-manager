@@ -13,13 +13,15 @@ const AnalysisStatusCards = () => {
   console.log(metrics);
   let expense, income;
 
-  expense =
-    data?.transactionReducer[0] &&
-    data?.transactionReducer?.find((item) => item._id === 'expense');
-  income =
-    data?.transactionReducer[0] &&
-    data?.transactionReducer?.find((item) => item._id === 'income');
-  console.log('expense', expense);
+  expense = (data?.transactionReducer[0] &&
+    data?.transactionReducer?.find((item) => item._id === 'expense')) || {
+    sum: 0,
+  };
+  income = (data?.transactionReducer[0] &&
+    data?.transactionReducer?.find((item) => item._id === 'income')) || {
+    sum: 0,
+  };
+  console.log('expense', expense, income);
   //   const [expense, income] = data?.transactionReducer;
   return (
     <div className="w-full text-white">
@@ -56,7 +58,7 @@ const AnalysisStatusCards = () => {
       </div>
       <div className="w-full flex items-center justify-center">
         <div className="flex md:hidden w-40 h-12 mt-2  bg-[#231D12] rounded-sm outline outline-1 outline-[#524326]  items-center justify-center">
-          Balance : Rs 3000
+          Balance : Rs {income?.sum - expense?.sum || 0}
         </div>
       </div>
     </div>
