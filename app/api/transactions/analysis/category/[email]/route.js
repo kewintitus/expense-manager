@@ -14,6 +14,7 @@ const getCategoryMetrics = async (req, { params }) => {
           $gte: new Date(fromDate),
           $lte: new Date(toDate),
         },
+        user: params.email,
       },
     },
     {
