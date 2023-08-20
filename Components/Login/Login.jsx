@@ -21,7 +21,7 @@ const Login = () => {
           className="bg-blue-900 hover:bg-blue-700 transition-all delay-150 text-white px-3 py-1 rounded-md text-lg w-32 z-50 flex items-center justify-center gap-3"
         >
           <Google />
-          <div>Log In</div>
+          <div>Sign in</div>
         </button>
       </div>
     </div>
