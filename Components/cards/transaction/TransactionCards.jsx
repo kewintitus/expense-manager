@@ -15,7 +15,7 @@ const TransactionCards = () => {
   }, [userTransactions]);
 
   return (
-    <div className="flex-col gap-4 h-full overflow-y-scroll">
+    <div className="flex-col gap-4 h-full pb-24 overflow-y-scroll">
       {txnData.map((data, i) => (
         <TransactionCard
           key={data._id}

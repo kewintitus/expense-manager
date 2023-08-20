@@ -33,7 +33,7 @@ const TransactionTable = () => {
   // }, [session]);
 
   return (
-    <table className="flex flex-col w-full  h-full overflow-hidden  gap-1">
+    <table className="flex flex-col w-full h-52  flex-1  gap-1">
       <TxnTableHead type={'spend'} />
       <div className="flex flex-col flex-1 gap-1 h-full overflow-y-scroll ">
         {txnData.map((data, i) => (
@@ -46,7 +46,7 @@ const TransactionTable = () => {
         ))}
       </div>
 
-      <Pagination />
+      {/* <Pagination /> */}
     </table>
   );
 };

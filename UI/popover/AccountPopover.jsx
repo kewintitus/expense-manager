@@ -41,7 +41,7 @@ const AccountPopover = (props) => {
       <Popover.Anchor />
       <Popover.Portal>
         <Popover.Content>
-          <ul className="bg-gray-600  text-sm rounded-sm cursor-pointer">
+          <ul className="bg-gray-100 outline outline-1 outline-gray-600 dark:bg-gray-600   text-sm rounded-sm cursor-pointer">
             <li className="p-1 hover:bg-gray-300 hover:text-gray-700">
               View Account
             </li>

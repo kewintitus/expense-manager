@@ -31,7 +31,7 @@ const Nav = async () => {
       {/* <MdMenu size={32} /> */}
       <div className="flex items-center gap-2 font-bold text-lg">
         <Image width={36} height={36} src={Logo} />
-        <h2>Expenses Manager</h2>
+        <h2>ExpenSync</h2>
       </div>
       {/* <Link href="/">Home</Link> */}
       <div className="hidden sm:flex items-center gap-2">
@@ -48,16 +48,18 @@ const Nav = async () => {
         />
         <NavLink icon={<MdMoreHoriz size={24} />} name="More" href="/more" />
       </div>
-      <Button className="justify-self-end ml-auto" />
-      <AccountPopover>
-        {/* <div className="flex gap-2">
+      <Button className="justify-self-end ml-8" />
+      <div className="flex-1 flex items-center justify-end">
+        <AccountPopover>
+          {/* <div className="flex gap-2">
           <MdOutlineAccountCircle className="text-4xl" />
           <div className="">
             <div className="text-base">Fname Lname</div>
             <div className="text-sm">mailId</div>
           </div>
         </div> */}
-      </AccountPopover>
+        </AccountPopover>
+      </div>
     </div>
   );
 };

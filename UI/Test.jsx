@@ -59,7 +59,7 @@ const Test = () => {
           Kindly Login to continue
         </div>
       ) : (
-        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3">
+        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3 overflow-hidden">
           <div className="md:hidden absolute bottom-28 left-[90%] translate-x-[-50%] z-50">
             <AddButton>Add</AddButton>
           </div>
@@ -87,10 +87,10 @@ const Test = () => {
               <AddButton>Add</AddButton>
             </div>
           </div>
-          <div className="hidden sm:block flex-1 ">
+          <div className="hidden sm:flex sm:flex-col sm:h-full flex-1 overflow-hidden ">
             <TransactionTable />
           </div>
-          <div className="block sm:hidden">
+          <div className="flex flex-col h-full flex-1 overflow-hidden  sm:hidden">
             <TransactionCards />
           </div>
         </div>
