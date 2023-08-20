@@ -60,7 +60,7 @@ const IncomeTrend = ({ startDate, endDate, sessionEmail, analysisType }) => {
     labels,
     datasets: [
       {
-        label: 'Expense',
+        label: 'Income',
         data: fetchedData.values,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
