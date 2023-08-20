@@ -20,7 +20,7 @@ const AccountPopover = (props) => {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <div className="flex gap-2 ">
+        <div className="flex gap-2 z-40 ">
           {status === 'authenticated' ? (
             <Image
               alt="user profile pic"
@@ -41,7 +41,7 @@ const AccountPopover = (props) => {
       <Popover.Anchor />
       <Popover.Portal>
         <Popover.Content>
-          <ul className="bg-gray-100 outline outline-1 outline-gray-600 dark:bg-gray-600   text-sm rounded-sm cursor-pointer">
+          <ul className="bg-gray-100 outline outline-1 outline-gray-600 dark:bg-gray-600   text-sm rounded-sm cursor-pointer z-50">
             <li className="p-1 hover:bg-gray-300 hover:text-gray-700">
               View Account
             </li>

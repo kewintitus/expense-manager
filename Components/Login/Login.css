@@ -1,0 +1,6 @@
+.bgImg {
+  background-image: url('./../../public/assets/money.jpg');
+  object-position: center;
+  object-fit: fill;
+  opacity: 1;
+}

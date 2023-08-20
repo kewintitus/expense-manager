@@ -12,6 +12,7 @@ import TransactionCards from '@/Components/cards/transaction/TransactionCards';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setTransactions } from '@/app/redux/slices/transactionSlice';
+import Login from '@/Components/Login/Login';
 // import { data } from 'autoprefixer';
 
 const Test = () => {
@@ -55,11 +56,9 @@ const Test = () => {
   return (
     <>
       {status === 'unauthenticated' ? (
-        <div className="w-full h-full bg-slate-700">
-          Kindly Login to continue
-        </div>
+        <Login />
       ) : (
-        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-3 overflow-hidden">
+        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-20 overflow-hidden">
           <div className="md:hidden absolute bottom-28 left-[90%] translate-x-[-50%] z-50">
             <AddButton>Add</AddButton>
           </div>
