@@ -58,7 +58,7 @@ const Test = () => {
       {status === 'unauthenticated' ? (
         <Login />
       ) : (
-        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-20 overflow-hidden">
+        <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-24 overflow-hidden">
           <div className="md:hidden absolute bottom-28 left-[90%] translate-x-[-50%] z-50">
             <AddButton>Add</AddButton>
           </div>
