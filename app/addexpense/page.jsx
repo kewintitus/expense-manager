@@ -33,20 +33,22 @@ const AddExpense = () => {
     setTxnType(payload);
   };
   return (
-    <div className="px-6">
+    <div className="px-6 flex flex-col overflow-y-scroll h-full pb-40 sm:pb-0">
       <BreadCrumb paths={paths} />
       <div className="text-lg my-2">Add New Transaction</div>
       <div className="mb-3">
         <h5 className="text-[#8C8C8C] text-sm">Select Transaction Type</h5>
         <SelectTransactionType fn={fetchData} />
       </div>
-      {txnType && (
-        <CreateTxnForm
-          setTxnType={setTxnType}
-          txnType={txnType}
-          user={session?.user?.email}
-        />
-      )}
+      <div className="flex-1 overflow-y-scroll">
+        {txnType && (
+          <CreateTxnForm
+            setTxnType={setTxnType}
+            txnType={txnType}
+            user={session?.user?.email}
+          />
+        )}
+      </div>
     </div>
   );
 };

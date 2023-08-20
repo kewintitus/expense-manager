@@ -140,9 +140,9 @@ const CreateTxnForm = (props) => {
         e.preventDefault();
         saveTransaction();
       }}
-      className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md"
+      className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md "
     >
-      <div className="flex w-full justify-start gap-2">
+      <div className="flex flex-col sm:flex-row w-full justify-start gap-2">
         <div className="flex flex-col items-start gap-1 flex-1">
           <label className="block text-xs  text-[#8C8C8C]" htmlFor="">
             Transaction Date
@@ -150,7 +150,7 @@ const CreateTxnForm = (props) => {
           <input
             type="datetime-local"
             ref={dateRef}
-            className="h-8 min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
+            className="h-8 w-full sm:w-36 sm:min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
             onChange={(e) => {
               // setData((prev) => setData(e.target.value));
               date = dateRef.current.value;
@@ -170,7 +170,7 @@ const CreateTxnForm = (props) => {
           />
         </div>
       </div>
-      <div className="flex justify-start w-full gap-2">
+      <div className="flex flex-col sm:flex-row justify-start w-full gap-2">
         <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Mode</FormLabel>
           <SelectTxnMode
@@ -188,18 +188,18 @@ const CreateTxnForm = (props) => {
               amount = e.target.value;
             }}
             ref={txnAmtRef}
-            className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm  dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
+            className="h-8 w-full sm:w-36 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm  dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
           />
         </div>
       </div>
-      <div className="flex justify-start w-full gap-2">
+      <div className="flex flex-col sm:flex-row justify-start w-full gap-2">
         <div className="flex-1">
           <div className="flex flex-col items-start gap-1 flex-1">
             <FormLabel>Note</FormLabel>
             <input
               type="text"
               ref={noteRef}
-              className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
+              className="h-8 w-full sm:w-36 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
               onChange={(e) => {
                 note = e.target.value;
                 console.log('note,', noteRef.current.value);
@@ -213,7 +213,7 @@ const CreateTxnForm = (props) => {
             <input
               type="text"
               ref={tagsRef}
-              className="h-8 min-w-8 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
+              className="h-8 w-full sm:w-36 text-xs  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:bg-[#191919] dark:outline-[#2E2E2E] px-2"
               onChange={(e) => {
                 tags = e.target.value;
                 // console.log('tags, ', tagsRef.current.value);

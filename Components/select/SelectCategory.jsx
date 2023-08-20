@@ -22,7 +22,7 @@ const SelectCategory = React.forwardRef((props, ref) => {
       // ref={ref}
     >
       <Select.Trigger
-        className="dark:bg-[#191919] w-32  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm text-sm flex justify-between items-center dark:outline-[#2E2E2E] h-8 px-2 "
+        className="dark:bg-[#191919] w-full sm:w-36  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm text-sm flex justify-between items-center dark:outline-[#2E2E2E] h-8 px-2 "
         aria-label="category"
         // ref={ref}
       >
