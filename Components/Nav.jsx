@@ -25,7 +25,6 @@ const Nav = () => {
   // const { data: session } = useSession();
   const { data: session, status } = useSession();
   const [userSession, setUserSession] = useState(null);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (status === 'unauthenticated') setUserSession(null);
