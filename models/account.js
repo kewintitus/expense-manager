@@ -4,7 +4,6 @@ const AccountSchema = new Schema({
   accountName: {
     type: String,
     required: [true, 'Account Name is required'],
-    unique: [true, 'Account Name must be unique'],
   },
   accountType: {
     type: String,
