@@ -24,7 +24,7 @@ const CreateBankAccountForm = (props) => {
   const postAccountData = async () => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_APIURL}/api/account/${props.session.user.email}`,
+        `${process.env.NEXT_PUBLIC_APIURL}/api/accounts/${props.session.user.email}`,
         {
           accountName: accountDetails.accountName,
           accountType: props.accountType,
