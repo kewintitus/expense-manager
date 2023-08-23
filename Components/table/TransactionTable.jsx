@@ -7,8 +7,9 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useSelector } from 'react-redux';
 import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
+import TableLoadSpinner from '@/UI/loaders/TableLoadSpinner';
 
-const TransactionTable = () => {
+const TransactionTable = (props) => {
   const { data: session, status } = useSession();
 
   const [txnData, setTxnData] = useState([]);
@@ -36,7 +37,9 @@ const TransactionTable = () => {
     <table className="flex flex-col w-full h-52  flex-1  gap-1">
       <TxnTableHead type={'spend'} />
       <div className="flex flex-col flex-1 gap-1 h-full overflow-y-scroll ">
-        {txnData.length === 0 ? (
+        {props.isTxnDataLoading ? (
+          <TableLoadSpinner />
+        ) : txnData.length === 0 ? (
           <div className="w-full h-full flex items-center justify-center">
             Data Unavailable
           </div>

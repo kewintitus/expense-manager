@@ -26,10 +26,12 @@ const SpendAccountsPie = ({ startDate, endDate, sessionEmail }) => {
 
   const data = {
     //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    labels: fetchedData.map((data) => {
-      console.log(data);
-      return data._id;
-    }),
+    labels:
+      fetchedData &&
+      fetchedData?.map((data) => {
+        console.log(data);
+        return data._id;
+      }),
     plugins: {
       legend: {
         position: 'bottom',

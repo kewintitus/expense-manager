@@ -14,7 +14,7 @@ const override = {
 
 function PageLoadSpinner() {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState('#98ffff');
+  const [color, setColor] = useState('#98ffff');
   const theme = useTheme();
   console.log(theme.theme);
   useEffect(() => {

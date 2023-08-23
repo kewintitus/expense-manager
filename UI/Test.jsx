@@ -21,12 +21,16 @@ const Test = () => {
 
   const [transactionData, setTransactionData] = useState([]);
 
+  const [isTxnDataLoading, setIsTxnDataLoading] = useState(true);
+
   const dispatch = useDispatch();
 
   const fetchUserTxn = async (start, end) => {
+    setIsTxnDataLoading(true);
     const userTransaction = await axios.get(
       `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/${session?.user?.email}?fromDate=${start}&toDate=${end}`
     );
+    setIsTxnDataLoading(false);
     setTransactionData(userTransaction);
     dispatch(setTransactions(userTransaction));
     console.log('In Test', userTransaction.data);
@@ -87,10 +91,10 @@ const Test = () => {
             </div>
           </div>
           <div className="hidden sm:flex sm:flex-col sm:h-full flex-1 overflow-hidden ">
-            <TransactionTable />
+            <TransactionTable isTxnDataLoading={isTxnDataLoading} />
           </div>
           <div className="flex flex-col h-full flex-1 overflow-hidden  sm:hidden">
-            <TransactionCards />
+            <TransactionCards isTxnDataLoading={isTxnDataLoading} />
           </div>
         </div>
       )}
