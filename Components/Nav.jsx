@@ -57,7 +57,7 @@ const Nav = () => {
         <div className="hidden sm:flex  ">
           <Button className=" justify-self-end ml-8" />
         </div>
-        <div className="flex-1 flex items-center justify-end z-40">
+        <div className="flex-1 flex items-center gap-1 justify-end z-40">
           <div className="flex sm:hidden">
             <Button className=" justify-self-end ml-8" />
           </div>
