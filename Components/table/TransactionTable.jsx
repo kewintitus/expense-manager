@@ -36,14 +36,20 @@ const TransactionTable = () => {
     <table className="flex flex-col w-full h-52  flex-1  gap-1">
       <TxnTableHead type={'spend'} />
       <div className="flex flex-col flex-1 gap-1 h-full overflow-y-scroll ">
-        {txnData.map((data, i) => (
-          <TxnTableBody
-            key={data._id}
-            sno={i}
-            data={data}
-            type={data.transactionType}
-          />
-        ))}
+        {txnData.length === 0 ? (
+          <div className="w-full h-full flex items-center justify-center">
+            Data Unavailable
+          </div>
+        ) : (
+          txnData.map((data, i) => (
+            <TxnTableBody
+              key={data._id}
+              sno={i}
+              data={data}
+              type={data.transactionType}
+            />
+          ))
+        )}
       </div>
 
       {/* <Pagination /> */}

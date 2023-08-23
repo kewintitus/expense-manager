@@ -72,7 +72,9 @@ const Test = () => {
           </div>
           <div className="flex items-center  justify-between">
             <TransactionStatuscards />
-            <div className="hidden sm:flex"></div>
+            <div className="hidden sm:flex">
+              <SelectMonth setData={fetchUserTxn} />
+            </div>
           </div>
 
           <div className="flex items-center justify-between my-2">
