@@ -25,7 +25,7 @@ const Test = () => {
 
   const fetchUserTxn = async (start, end) => {
     const userTransaction = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/${session.user.email}?fromDate=${start}&toDate=${end}`
+      `${process.env.NEXT_PUBLIC_APIURL}/api/transactions/${session?.user?.email}?fromDate=${start}&toDate=${end}`
     );
     setTransactionData(userTransaction);
     dispatch(setTransactions(userTransaction));

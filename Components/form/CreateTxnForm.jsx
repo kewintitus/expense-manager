@@ -86,12 +86,16 @@ const CreateTxnForm = (props) => {
   const [userAccounts, setUserAccounts] = useState([]);
 
   const getUserAccounts = async (email) => {
-    const data = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/api/account/${email}`
-    );
-    const accounts = data.data.data;
-    console.log(data.data.data);
-    setUserAccounts(accounts);
+    try {
+      const data = await axios.get(
+        `${process.env.NEXT_PUBLIC_APIURL}/api/account/${email}`
+      );
+      const accounts = data.data.data;
+      console.log(data.data.data);
+      setUserAccounts(accounts);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
