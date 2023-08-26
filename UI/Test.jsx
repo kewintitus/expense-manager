@@ -59,7 +59,7 @@ const Test = () => {
 
   return (
     <>
-      {status === 'unauthenticated' ? (
+      {!userSession ? (
         <Login />
       ) : (
         <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-24 overflow-hidden">
