@@ -32,6 +32,7 @@ import SelectAccountName from '../select/SelectAccountName';
 const CreateTxnForm = (props) => {
   // const [data, setData] = useState({});
   const { data: session, status } = useSession();
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   let date, category, transactionMode, amount, note, tags, accountName;
 
@@ -104,6 +105,7 @@ const CreateTxnForm = (props) => {
 
   const saveTransaction = async () => {
     try {
+      setIsBtnDisabled(true);
       const result = await axios.post(
         `${process.env.NEXT_PUBLIC_APIURL}/api/transactions`,
         {
@@ -124,6 +126,7 @@ const CreateTxnForm = (props) => {
           email: session.user.email,
         }
       );
+      setIsBtnDisabled(false);
       window.alert('Transaction saved successfully');
       props.setTxnType(null);
     } catch (error) {
@@ -241,7 +244,9 @@ const CreateTxnForm = (props) => {
         <Link href="/">
           <CancelBtn className="">Cancel</CancelBtn>
         </Link>
-        <SubmitBtn type="submit">Submit</SubmitBtn>
+        <SubmitBtn isBtnDisabled={isBtnDisabled} type="submit">
+          Submit
+        </SubmitBtn>
       </div>
     </form>
   );
