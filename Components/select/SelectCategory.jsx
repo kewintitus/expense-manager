@@ -14,6 +14,7 @@ const SelectCategory = React.forwardRef((props, ref) => {
   }, [props.data]);
   return (
     <Select.Root
+      required
       onValueChange={(e) => {
         // console.log(e);
         props.setCategory(ref.current.innerHTML);
@@ -26,7 +27,7 @@ const SelectCategory = React.forwardRef((props, ref) => {
         aria-label="category"
         // ref={ref}
       >
-        <Select.Value ref={ref} placeholder="Select" />
+        <Select.Value defaultValue={null} ref={ref} placeholder="Select" />
         <Select.Icon>
           <ChevronDownIcon />
         </Select.Icon>

@@ -9,6 +9,7 @@ import { MdOutlineFastfood } from 'react-icons/md';
 const SelectTxnMode = React.forwardRef((props, ref) => {
   return (
     <Select.Root
+      required
       onValueChange={(e) => {
         props.setTransactionMode(ref.current.innerHTML);
         console.log(ref.current.innerHTML);

@@ -10,10 +10,13 @@ import AddButton from './AddButton';
 import TransactionTable from '@/Components/table/TransactionTable';
 import TransactionCards from '@/Components/cards/transaction/TransactionCards';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/app/redux/slices/transactionSlice';
 import Login from '@/Components/Login/Login';
+import { ToastContainer, toast } from 'react-toastify';
+import { selectToast } from '@/app/redux/slices/toastSlice';
 // import { data } from 'autoprefixer';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Test = () => {
   const { data: session, status } = useSession();
@@ -24,6 +27,8 @@ const Test = () => {
   const [isTxnDataLoading, setIsTxnDataLoading] = useState(true);
 
   const dispatch = useDispatch();
+  const { toastContent } = useSelector(selectToast);
+  toastContent && toast(toastContent.message);
 
   const fetchUserTxn = async (start, end) => {
     setIsTxnDataLoading(true);
@@ -65,6 +70,7 @@ const Test = () => {
         <div className="w-full flex flex-col h-full dark:bg-[#1E1E1E] px-6 pt-5 pb-24 overflow-hidden">
           <div className="md:hidden absolute bottom-28 left-[90%] translate-x-[-50%] z-50">
             <AddButton>Add</AddButton>
+            {/* <div>{toastContent.message}</div> */}
           </div>
           <div className="flex w-full items-center justify-between ">
             <div className=" font-medium text-lg ">
@@ -79,6 +85,7 @@ const Test = () => {
             <div className="hidden sm:flex">
               <SelectMonth setData={fetchUserTxn} />
             </div>
+            {/* <div>{toastContent}</div> */}
           </div>
 
           <div className="flex items-center justify-between my-2">

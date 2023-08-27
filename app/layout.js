@@ -5,6 +5,7 @@ import Nav from '@/Components/Nav';
 import Sidebar from '@/Components/Sidebar';
 import MobileNav from '@/UI/MobileNav';
 import Head from 'next/head';
+import { ToastContainer, toast } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 const roboto = Roboto({
@@ -23,6 +24,8 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.className} overflow-hidden`}>
         <Providers>
           <Nav />
+          <ToastContainer />
+
           <div className="h-screen   ">
             {/* <Sidebar /> */}
             {children}

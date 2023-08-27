@@ -28,6 +28,8 @@ import Link from 'next/link';
 import CancelBtn from '@/UI/formui/CancelBtn';
 import axios from 'axios';
 import SelectAccountName from '../select/SelectAccountName';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateTxnForm = (props) => {
   // const [data, setData] = useState({});
@@ -95,6 +97,7 @@ const CreateTxnForm = (props) => {
       console.log(data.data.data);
       setUserAccounts(accounts);
     } catch (error) {
+      toast('Error while saving data');
       console.log(error);
     }
   };
@@ -112,8 +115,14 @@ const CreateTxnForm = (props) => {
           savedata: {
             transactionType: props.txnType,
             transactionDate: dateRef.current.value,
-            transactionCategory: categoryRef.current.innerHTML,
-            transactionMode: txnModeRef.current.innerHTML,
+            transactionCategory:
+              categoryRef.current.innerHTML == 'Select'
+                ? null
+                : categoryRef.current.innerHTML,
+            transactionMode:
+              txnModeRef.current.innerHTML == 'Select'
+                ? null
+                : txnModeRef.current.innerHTML,
             bankAccountName:
               txnModeRef.current.innerHTML === 'Bank Account'
                 ? accountNameRef?.current?.innerHTML
@@ -127,10 +136,33 @@ const CreateTxnForm = (props) => {
         }
       );
       setIsBtnDisabled(false);
-      window.alert('Transaction saved successfully');
+      // props.successToast();
+      toast.success('Data saved successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       props.setTxnType(null);
     } catch (error) {
-      console.log(error);
+      toast.error(error?.response?.data?.error_details, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      setIsBtnDisabled(false);
+      // window.alert('Error saving data');
+
+      console.log(error?.response?.data?.error_details);
     }
 
     // console.log(result);
@@ -155,6 +187,7 @@ const CreateTxnForm = (props) => {
             Transaction Date
           </label>
           <input
+            required
             type="datetime-local"
             ref={dateRef}
             className="h-8 w-full sm:w-36 sm:min-w-8 text-xs bg-slate-100 outline outline-1 outline-slate-300 rounded-sm dark:outline-[#2E2E2E]  dark:bg-[#191919] px-2"
@@ -189,6 +222,7 @@ const CreateTxnForm = (props) => {
         <div className="flex flex-col items-start gap-1 flex-1">
           <FormLabel>Transaction Amount</FormLabel>
           <input
+            required
             type="number"
             onChange={(e) => {
               console.log(txnAmtRef?.current?.value);
