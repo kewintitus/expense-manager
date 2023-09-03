@@ -82,7 +82,7 @@ const CreateBankAccountForm = (props) => {
         <Link href="/">
           <CancelBtn className="">Cancel</CancelBtn>
         </Link>
-        <SubmitBtn type="submit">Submit</SubmitBtn>
+        <SubmitBtn>Submit</SubmitBtn>
       </div>
     </form>
   );
