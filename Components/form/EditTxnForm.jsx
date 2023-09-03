@@ -96,6 +96,7 @@ const EditTxnForm = (props) => {
   };
 
   const editTransactionRequest = async () => {
+    // console.log(categoryRef.current.innerHTML, 'category');
     try {
       const updatedData = await axios.patch(
         `${process?.env?.NEXT_PUBLIC_APIURL}/api/transactions`,
@@ -103,21 +104,16 @@ const EditTxnForm = (props) => {
           savedata: {
             transactionType: txnData?.transactionType,
             transactionDate: dateRef.current?.value,
-            transactionCategory:
-              categoryRef.current.innerHTML == '' || 'Select'
-                ? null
-                : categoryRef.current.innerHTML,
+            transactionCategory: categoryRef.current.innerHTML,
             transactionMode: txnData?.transactionMode,
-            bankAccountName:
-              txnData?.transactionMode === 'Bank Account'
-                ? accountNameRef?.current?.innerHTML
-                : '',
+            bankAccountName: accountNameRef?.current?.innerHTML,
             transactionAmount: txnAmtRef?.current?.value,
             transactionNote: noteRef.current?.value,
             transactionTags: tagsRef.current.value,
-            user: props?.user,
+            user: props?.user?.email,
           },
           email: props?.userEmail,
+          txnId: props?.txnId,
         }
       );
       console.log(updatedData);
@@ -128,10 +124,7 @@ const EditTxnForm = (props) => {
     console.log({
       transactionType: txnData?.transactionType,
       transactionDate: dateRef.current?.value,
-      transactionCategory:
-        categoryRef.current.innerHTML == '' || 'Select'
-          ? null
-          : categoryRef.current.innerHTML,
+      transactionCategory: categoryRef.current.innerHTML,
       transactionMode: txnData?.transactionMode,
       bankAccountName:
         txnData?.transactionMode === 'Bank Account'
@@ -143,11 +136,21 @@ const EditTxnForm = (props) => {
       user: props?.user,
     });
   };
+  function toLocalDatetimeString(localDateString) {
+    const localDate = new Date(localDateString);
+    const year = localDate.getFullYear();
+    const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = localDate.getDate().toString().padStart(2, '0');
+    const hours = localDate.getHours().toString().padStart(2, '0');
+    const minutes = localDate.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        // submitEdit();
+        submitEdit();
         editTransactionRequest();
       }}
       className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md "
@@ -177,13 +180,14 @@ const EditTxnForm = (props) => {
               onChange={(e) => {
                 // setData((prev) => setData(e.target.value));
                 date = dateRef.current.value;
-                // console.log(e.target.value);
-                console.log(date);
+                console.log(
+                  toLocalDatetimeString(txnData?.transactionDate),
+                  'from DB'
+                );
+                console.log(new Date(date));
                 console.log('date', dateRef.current.value);
               }}
-              defaultValue={new Date(txnData?.transactionDate)
-                .toISOString()
-                .slice(0, 16)}
+              defaultValue={toLocalDatetimeString(txnData?.transactionDate)}
               //   value={txnData?.transactionDate}
             />
           </div>

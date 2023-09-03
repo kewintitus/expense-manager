@@ -136,10 +136,91 @@ const updateTransaction = async (req) => {
     const body = await req.json();
 
     console.log(body);
-    return new Response(JSON.stringify({ message: 'Success' }), {
-      status: 200,
+    const txnId = body.txnId;
+    const orgTxn = await Transaction.findById(body.txnId);
+    console.log(orgTxn);
+    const prevAmount = Number(orgTxn.transactionAmount);
+    const newAmount = Number(body.savedata.transactionAmount);
+    const prevBank = orgTxn?.bankAccountName;
+    const newBank = body.savedata.bankAccountName;
+    const newCategory = String(body.savedata.transactionCategory);
+    const newTxnDate = new Date(body.savedata.transactionDate);
+    const newTxnNote = body.savedata.transactionNote;
+    const newTxnTags = body.savedata.transactionTags;
+    const txnType = body.savedata.transactionType;
+    console.log(prevAmount, newAmount, prevBank, newBank, newCategory, txnType);
+
+    let metrics;
+
+    // const changeUserMetrics = await userMetrics.find({
+    //   'user.email': body.email,
+    // });
+    // console.log('User Metrics', changeUserMetrics[0]);
+    // metrics = changeUserMetrics[0];
+    // console.log(metrics, 'metrics');
+    const updateValue = newAmount - prevAmount;
+    console.log(newAmount - prevAmount);
+
+    if (txnType === 'expense') {
+      const updateUserMetrics = await userMetrics.findOneAndUpdate(
+        {
+          'user.email': body.email,
+        },
+        {
+          $inc: { spending: updateValue, balance: -updateValue },
+        }
+      );
+
+      const updateTransaction = await Transaction.findByIdAndUpdate(txnId, {
+        $set: {
+          transactionDate: newTxnDate,
+          transactionCategory: String(newCategory),
+          transactionAmount: newAmount,
+          bankAccountName: newBank,
+          transactionNote: newTxnNote,
+          transactionTags: newTxnTags,
+        },
+      });
+      console.log(updateTransaction);
+    } else if (txnType === 'income') {
+      const updateUserMetrics = await userMetrics.findOneAndUpdate(
+        {
+          'user.email': body.email,
+        },
+        {
+          $inc: { income: updateValue, balance: updateValue },
+        }
+      );
+    }
+    const test = await Transaction.findById(String(txnId));
+    console.log('before', test);
+    const updateTransaction = await Transaction.findByIdAndUpdate(txnId, {
+      $set: {
+        transactionDate: newTxnDate,
+        transactionCategory: String(newCategory),
+        transactionAmount: newAmount,
+        bankAccountName: newBank,
+        transactionNote: newTxnNote,
+        transactionTags: newTxnTags,
+      },
     });
-  } catch (error) {}
+    const test2 = await Transaction.findById(txnId);
+    console.log('after', test2);
+
+    return new Response(
+      JSON.stringify({ message: 'Data updated successfully' }),
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: 'Error while updating data' }),
+      {
+        status: 400,
+      }
+    );
+  }
 };
 
 export {

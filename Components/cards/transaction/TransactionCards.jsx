@@ -4,6 +4,7 @@ import TransactionCard from './TransactionCard';
 import { useSelector } from 'react-redux';
 import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
 import TableLoadSpinner from '@/UI/loaders/TableLoadSpinner';
+import Link from 'next/link';
 
 const TransactionCards = (props) => {
   const [txnData, setTxnData] = useState([]);
@@ -25,12 +26,14 @@ const TransactionCards = (props) => {
         </div>
       ) : (
         txnData.map((data, i) => (
-          <TransactionCard
-            key={data._id}
-            sno={i}
-            data={data}
-            type={data.transactionType}
-          />
+          <Link href={`/editTransaction/${data?._id}`}>
+            <TransactionCard
+              key={data._id}
+              sno={i}
+              data={data}
+              type={data.transactionType}
+            />
+          </Link>
         ))
       )}
       {/* <TransactionCard type="income" />
