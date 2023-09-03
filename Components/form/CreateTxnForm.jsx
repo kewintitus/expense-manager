@@ -48,7 +48,7 @@ const CreateTxnForm = (props) => {
   // console.log('txnAmtRef', txnAmtRef.current.value);
   const categories = {
     expense: [
-      { name: 'Food & Dining', icon: <MdOutlineFastfood /> },
+      { name: 'Food and Dining', icon: <MdOutlineFastfood /> },
       { name: 'Shopping', icon: <MdOutlineShoppingCart /> },
       { name: 'Travelling', icon: <MdFlight /> },
       { name: 'Entertainment', icon: <MdPlayArrow /> },
@@ -97,7 +97,7 @@ const CreateTxnForm = (props) => {
       console.log(data.data.data);
       setUserAccounts(accounts);
     } catch (error) {
-      toast('Error while saving data');
+      toast('Error fetching user accounts');
       console.log(error);
     }
   };

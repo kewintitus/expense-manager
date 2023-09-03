@@ -8,10 +8,11 @@ import { MdOutlineFastfood } from 'react-icons/md';
 
 const SelectCategory = React.forwardRef((props, ref) => {
   const [catList, setCatList] = useState([]);
+  console.log(props?.defaultValue, 'Default');
 
   useEffect(() => {
     setCatList(props.data[props.type]);
-  }, [props.data]);
+  }, [props.data, props?.defaultValue]);
   return (
     <Select.Root
       required
@@ -20,14 +21,19 @@ const SelectCategory = React.forwardRef((props, ref) => {
         props.setCategory(ref.current.innerHTML);
         console.log('cat ref', ref.current);
       }}
-      // ref={ref}
+      defaultValue={props?.defaultValue}
+      ref={ref}
     >
       <Select.Trigger
         className="dark:bg-[#191919] w-full sm:w-36  bg-slate-100 outline outline-1 outline-slate-300 rounded-sm text-sm flex justify-between items-center dark:outline-[#2E2E2E] h-8 px-2 "
         aria-label="category"
-        // ref={ref}
+        ref={ref}
       >
-        <Select.Value defaultValue={null} ref={ref} placeholder="Select" />
+        <Select.Value
+          defaultValue={props?.defaultValue}
+          ref={ref}
+          placeholder="Select"
+        />
         <Select.Icon>
           <ChevronDownIcon />
         </Select.Icon>

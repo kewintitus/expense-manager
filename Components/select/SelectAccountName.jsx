@@ -15,12 +15,17 @@ const SelectAccountName = React.forwardRef((props, ref) => {
         console.log('innerHTMl', ref.current.innerHTML);
         props.setTransactionAccountName(e);
       }}
+      defaultValue={props?.defaultValue}
     >
       <Select.Trigger
         className="dark:bg-[#191919]  w-32 text-sm flex justify-between items-center  h-8 px-2  bg-slate-100 outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] rounded-sm"
         aria-label="category"
       >
-        <Select.Value ref={ref} placeholder="Select" />
+        <Select.Value
+          ref={ref}
+          placeholder="Select"
+          defaultValue={props?.defaultValue}
+        />
         <Select.Icon>
           <ChevronDownIcon />
         </Select.Icon>

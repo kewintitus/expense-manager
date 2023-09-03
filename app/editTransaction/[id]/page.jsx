@@ -30,11 +30,11 @@ const page = () => {
     { page: 'Edit Transaction', path: pathname },
   ];
   return (
-    <div className="px-6">
+    <div className="px-6 flex flex-col overflow-y-scroll h-full pb-48 sm:pb-0">
       <BreadCrumb paths={paths} />
       <ToastContainer />
       <div className="text-lg my-2">Edit Transaction</div>
-      <div className="flex-1 overflow-y-scroll my-2">
+      <div className="flex-1 overflow-y-scroll sm:overflow-y-auto my-2">
         <EditTxnForm userEmail={session?.user?.email} txnId={txnId} />
       </div>
     </div>

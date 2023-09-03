@@ -56,7 +56,7 @@ const AddExpense = () => {
         <h5 className="text-[#8C8C8C] text-sm">Select Transaction Type</h5>
         <SelectTransactionType fn={fetchData} />
       </div>
-      <div className="flex-1 overflow-y-scroll">
+      <div className="flex-1 overflow-y-scroll sm:overflow-y-auto">
         {txnType && (
           <CreateTxnForm
             successToast={successToast}
