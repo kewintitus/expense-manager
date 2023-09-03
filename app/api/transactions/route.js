@@ -114,4 +114,19 @@ const createNewTransaction = async (req) => {
   }
 };
 
-export { createNewTransaction as POST };
+const getTransaction = async (req) => {
+  try {
+    const txnId = req.nextUrl.searchParams.get('txnId');
+    if (txnId) {
+      const txnData = await Transaction.findById(txnId);
+      return new Response(JSON.stringify(txnData), { status: 200 });
+    }
+  } catch (error) {
+    return new Response(
+      { message: 'Unable to get transactions' },
+      { status: 400 }
+    );
+  }
+};
+
+export { createNewTransaction as POST, getTransaction as GET };

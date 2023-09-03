@@ -36,7 +36,12 @@ const Nav = () => {
       <div className=" px-2 flex justify-between z-30 sm:justify-normal h-16 sm:w-full  items-center gap-2 nav-light--bg text-slate-800 dark:nav-dark--bg dark:text-gray-300">
         {/* <MdMenu size={32} /> */}
         <div className="flex items-center gap-2 font-bold text-lg">
-          <Image width={36} height={36} src={Logo} />
+          <Image
+            width={36}
+            height={36}
+            src={Logo}
+            alt="expensync application logo"
+          />
           <h2>ExpenSync</h2>
         </div>
         {/* <Link href="/">Home</Link> */}

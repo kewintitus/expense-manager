@@ -13,6 +13,7 @@ const getUserTransactions = async (req, { params }) => {
     const fromDate = req.nextUrl.searchParams.get('fromDate');
     const toDate = req.nextUrl.searchParams.get('toDate');
     const sortOrder = req.nextUrl.searchParams.get('sort') || -1;
+    const txnId = req.nextUrl.searchParams.get('txnId');
 
     // console.log(req.nextUrl.searchParams.get('fromDate'));
     // console.log(req.nextUrl.searchParams.get('toDate'));
@@ -48,6 +49,13 @@ const getUserTransactions = async (req, { params }) => {
         return new Response(JSON.stringify(userMonthlyTransactions), {
           status: 200,
         });
+      }
+      if (txnId) {
+        const txnId = req.nextUrl.searchParams.get('txnId');
+        if (txnId) {
+          const txnData = await Transaction.findById(txnId);
+          return new Response(JSON.stringify(txnData), { status: 200 });
+        }
       }
 
       const userTransactions = await Transaction.find({

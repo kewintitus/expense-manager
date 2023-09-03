@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import { useSelector } from 'react-redux';
 import { selectTransactionData } from '@/app/redux/slices/transactionSlice';
 import TableLoadSpinner from '@/UI/loaders/TableLoadSpinner';
+import Link from 'next/link';
 
 const TransactionTable = (props) => {
   const { data: session, status } = useSession();
@@ -45,12 +46,14 @@ const TransactionTable = (props) => {
           </div>
         ) : (
           txnData.map((data, i) => (
-            <TxnTableBody
-              key={data._id}
-              sno={i}
-              data={data}
-              type={data.transactionType}
-            />
+            <Link href={`/editTransaction/${data?._id}`}>
+              <TxnTableBody
+                key={data._id}
+                sno={i}
+                data={data}
+                type={data.transactionType}
+              />
+            </Link>
           ))
         )}
       </div>
