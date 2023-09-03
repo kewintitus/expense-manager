@@ -116,6 +116,7 @@ const createNewTransaction = async (req) => {
 
 const getTransaction = async (req) => {
   try {
+    await connectToDb();
     const txnId = req.nextUrl.searchParams.get('txnId');
     if (txnId) {
       const txnData = await Transaction.findById(txnId);
@@ -123,10 +124,26 @@ const getTransaction = async (req) => {
     }
   } catch (error) {
     return new Response(
-      { message: 'Unable to get transactions' },
+      JSON.stringify({ message: 'Unable to get transactions' }),
       { status: 400 }
     );
   }
 };
 
-export { createNewTransaction as POST, getTransaction as GET };
+const updateTransaction = async (req) => {
+  try {
+    await connectToDb();
+    const body = await req.json();
+
+    console.log(body);
+    return new Response(JSON.stringify({ message: 'Success' }), {
+      status: 200,
+    });
+  } catch (error) {}
+};
+
+export {
+  createNewTransaction as POST,
+  getTransaction as GET,
+  updateTransaction as PATCH,
+};

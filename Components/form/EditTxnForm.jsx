@@ -95,8 +95,63 @@ const EditTxnForm = (props) => {
     accountName = value;
   };
 
+  const editTransactionRequest = async () => {
+    try {
+      const updatedData = await axios.patch(
+        `${process?.env?.NEXT_PUBLIC_APIURL}/api/transactions`,
+        {
+          savedata: {
+            transactionType: txnData?.transactionType,
+            transactionDate: dateRef.current?.value,
+            transactionCategory:
+              categoryRef.current.innerHTML == '' || 'Select'
+                ? null
+                : categoryRef.current.innerHTML,
+            transactionMode: txnData?.transactionMode,
+            bankAccountName:
+              txnData?.transactionMode === 'Bank Account'
+                ? accountNameRef?.current?.innerHTML
+                : '',
+            transactionAmount: txnAmtRef?.current?.value,
+            transactionNote: noteRef.current?.value,
+            transactionTags: tagsRef.current.value,
+            user: props?.user,
+          },
+          email: props?.userEmail,
+        }
+      );
+      console.log(updatedData);
+    } catch (error) {}
+  };
+
+  const submitEdit = () => {
+    console.log({
+      transactionType: txnData?.transactionType,
+      transactionDate: dateRef.current?.value,
+      transactionCategory:
+        categoryRef.current.innerHTML == '' || 'Select'
+          ? null
+          : categoryRef.current.innerHTML,
+      transactionMode: txnData?.transactionMode,
+      bankAccountName:
+        txnData?.transactionMode === 'Bank Account'
+          ? accountNameRef?.current?.innerHTML
+          : '',
+      transactionAmount: txnAmtRef?.current?.value,
+      transactionNote: noteRef.current?.value,
+      transactionTags: tagsRef.current.value,
+      user: props?.user,
+    });
+  };
   return (
-    <form className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md ">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        // submitEdit();
+        editTransactionRequest();
+      }}
+      className="flex flex-col items-start justify-center w-full outline outline-1 outline-slate-300 dark:outline-[#2E2E2E] gap-4 p-2 rounded-md "
+    >
       <div>
         <label htmlFor="" className=" text-xs  text-[#8C8C8C]">
           Transaction Type

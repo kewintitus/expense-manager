@@ -35,7 +35,11 @@ const page = () => {
       <ToastContainer />
       <div className="text-lg my-2">Edit Transaction</div>
       <div className="flex-1 overflow-y-scroll sm:overflow-y-auto my-2">
-        <EditTxnForm userEmail={session?.user?.email} txnId={txnId} />
+        <EditTxnForm
+          user={session?.user}
+          userEmail={session?.user?.email}
+          txnId={txnId}
+        />
       </div>
     </div>
   );
