@@ -65,7 +65,10 @@ const SelectMonth = (props) => {
   const increaseDate = () => {
     const actDate = new Date();
     const currDate = new Date(month_year);
-    if (new Date(actDate).getMonth() > new Date(currDate).getMonth()) {
+    if (
+      new Date(actDate).getMonth() > new Date(currDate).getMonth() ||
+      new Date(actDate).getFullYear() > new Date(currDate).getFullYear()
+    ) {
       const options = { month: 'long', year: 'numeric' };
       currDate.setMonth(currDate.getMonth() + 1);
       const formattedDate = currDate.toLocaleString('en-US', options);
@@ -88,7 +91,7 @@ const SelectMonth = (props) => {
   };
 
   return (
-    <div className="w-24 text-sm rounded-md  flex h-12 px-4 items-center justify-center md:w-52 gap-2 outline outline-1 outline-[#dcdbd7]  dark:outline-[#252525] bg-[#e7e6e3] dark:bg-[#14141E]">
+    <div className="w-28 text-sm rounded-md  flex h-12 px-4 items-center justify-center md:w-52 gap-2 outline outline-1 outline-[#dcdbd7]  dark:outline-[#252525] bg-[#e7e6e3] dark:bg-[#14141E]">
       {/* <Calendar view="year" onChange={onChange} value={value} /> */}
       <div className="cursor-pointer w-8  rounded-full" onClick={reduceDate}>
         <MdChevronLeft />
