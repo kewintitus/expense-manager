@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const EditAccount = () => {
   const paths = [
@@ -62,12 +63,33 @@ const EditAccount = () => {
       );
       setIsEditable(false);
       getAccount();
+      toast.success('Data updated successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     } catch (error) {
       console.log(error);
+      toast.error('Error while saving changes', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
   };
   return (
     <div className="px-4">
+      <ToastContainer />
       <BreadCrumb paths={paths} />
       <form
         onSubmit={(e) => {

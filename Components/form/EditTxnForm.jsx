@@ -24,6 +24,7 @@ import SelectAccountName from '../select/SelectAccountName';
 import Link from 'next/link';
 import CancelBtn from '@/UI/formui/CancelBtn';
 import SubmitBtn from '@/UI/formui/SubmitBtn';
+import { toast } from 'react-toastify';
 
 const EditTxnForm = (props) => {
   let date, category, amount, accountName, note;
@@ -116,8 +117,31 @@ const EditTxnForm = (props) => {
           txnId: props?.txnId,
         }
       );
+      toast.success('Data saved successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
       console.log(updatedData);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      // toast.error(error?.response?.data?.error_details, {
+      toast.error('Error while updating transaction', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
   };
 
   const submitEdit = () => {
