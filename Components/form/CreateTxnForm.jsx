@@ -114,7 +114,7 @@ const CreateTxnForm = (props) => {
         {
           savedata: {
             transactionType: props.txnType,
-            transactionDate: dateRef.current.value,
+            transactionDate: new Date(dateRef.current.value),
             transactionCategory:
               categoryRef.current.innerHTML == 'Select'
                 ? null

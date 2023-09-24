@@ -4,6 +4,15 @@ import React from 'react';
 const TxnTableBody = (props) => {
   const type = 'spend';
   const date = new Date(props.data.transactionDate);
+  console.log(date.getTimezoneOffset());
+  const offset = date.getTimezoneOffset();
+  console.log(new Date(date.getTime() - offset));
+  console.log(
+    new Date(props.data.transactionDate).toLocaleString(undefined, {
+      timeZone: 'Asia/Kolkata',
+    })
+  );
+
   const formattedDate = `${date.getDate()}-${
     date.getMonth() + 1
   }-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
