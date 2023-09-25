@@ -45,6 +45,7 @@ const EditTxnForm = (props) => {
     );
     console.log(data.data);
     setTxnData(data.data);
+    props.setTxnData(data.data);
   };
   const getUserAccounts = async (email) => {
     try {
