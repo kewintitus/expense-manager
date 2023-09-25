@@ -1,4 +1,5 @@
 import Account from '@/models/account';
+import DeletedTransaction from '@/models/deletedTransaction';
 import Transaction from '@/models/transactions';
 import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
@@ -225,14 +226,141 @@ const updateTransaction = async (req) => {
 
 const deleteTransaction = async (req) => {
   try {
-    const reqBody = await req.json();
-    console.log(reqBody);
+    await connectToDb();
+    const txnId = req.nextUrl.searchParams.get('txnId');
+
+    // const reqBody = await req.json();
+    console.log(txnId);
+
+    const transaction = await Transaction.findById(txnId);
+
+    if (transaction?.transactionMode === 'Bank Account') {
+      if (transaction?.transactionType === 'expense') {
+        const updateAccountBalance = await Account.findOneAndUpdate(
+          {
+            $and: [
+              { accountName: transaction?.accountName },
+              { user: transaction?.user },
+            ],
+          },
+          {
+            $inc: { amount: +Number(transaction.transactionAmount) },
+          }
+        );
+        console.log(updateAccountBalance);
+        const updateMetrics = await userMetrics.findOneAndUpdate(
+          {
+            'user.email': transaction.user,
+          },
+          {
+            $inc: {
+              spending: -transaction.transactionAmount,
+              balance: +transaction.transactionAmount,
+            },
+          }
+          //   { $inc: { balance: body.transactionAmount } },
+        );
+      } else if (transaction?.transactionType === 'income') {
+        const updateAccountBalance = await Account.findOneAndUpdate(
+          {
+            $and: [
+              { accountName: transaction?.accountName },
+              { user: transaction?.user },
+            ],
+          },
+          {
+            $inc: { amount: -Number(transaction.transactionAmount) },
+          }
+        );
+      }
+
+      const updateMetrics = await userMetrics.findOneAndUpdate(
+        {
+          'user.email': transaction.user,
+        },
+        {
+          $inc: {
+            income: -transaction.transactionAmount,
+            balance: -transaction.transactionAmount,
+          },
+        }
+        //   { $inc: { balance: body.transactionAmount } },
+      );
+
+      // await Transaction.deleteOne({ _id: txnId });
+    } else if (transaction?.transactionMode === 'Cash') {
+      if (transaction.transactionType === 'income') {
+        const updateAccountBalance = await Account.findOneAndUpdate(
+          {
+            $and: [
+              { accountName: transaction.accountName },
+              { user: transaction.user },
+            ],
+          },
+          {
+            $inc: { amount: -Number(transaction.transactionAmount) },
+          }
+        );
+
+        const updateMetrics = await userMetrics.findOneAndUpdate(
+          {
+            'user.email': transaction.user,
+          },
+          {
+            $inc: {
+              income: -transaction.transactionAmount,
+              balance: -transaction.transactionAmount,
+            },
+          }
+          //   { $inc: { balance: body.transactionAmount } },
+        );
+      } else {
+        const updateAccountBalance = await Account.findOneAndUpdate(
+          {
+            $and: [
+              { accountName: transaction.accountName },
+              { user: transaction.user },
+            ],
+          },
+          {
+            $inc: { amount: +Number(transaction.transactionAmount) },
+          }
+        );
+        const updateMetrics = await userMetrics.findOneAndUpdate(
+          {
+            'user.email': transaction.user,
+          },
+          {
+            $inc: {
+              spending: -Number(transaction.transactionAmount),
+              balance: +Number(transaction.transactionAmount),
+            },
+          }
+          //   { $inc: { balance: body.transactionAmount } },
+        );
+      }
+    }
+
+    const deleted = await DeletedTransaction.create({
+      transactionType: transaction.transactionType,
+      transactionDate: transaction.transactionDate,
+      transactionCategory: transaction.transactionCategory,
+      transactionMode: transaction?.transactionMode,
+      bankAccountName: transaction?.bankAccountName,
+      transactionAmount: transaction?.transactionAmount,
+      transactionNote: transaction?.transactionNote,
+      transactionTags: transaction?.transactionTags,
+      user: transaction?.user,
+      deletedOn: new Date(),
+    });
+    await Transaction.deleteOne({ _id: txnId });
+
+    console.log(deleted);
+    // console.log({ ...transaction, deletedOn: new Date() });
 
     return new Response(
       JSON.stringify({ message: 'Transaction Deleted successfully' }),
-      {
-        status: 204,
-      }
+      { status: 202 }
     );
   } catch (error) {
     return new Response(

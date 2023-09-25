@@ -5,10 +5,22 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import './dialog.css';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import axios from 'axios';
 
 const DialogDemo = (props) => {
   console.log(props.txnData);
   const [open, setIsOpen] = useState(false);
+
+  const deleteTransaction = async () => {
+    try {
+      const data = await axios.delete(
+        `/api/transactions?txnId=${props?.txnData?._id}`
+      );
+      window.alert('deleted successfully');
+    } catch (error) {
+      window.alert('Error while deleting data');
+    }
+  };
   return (
     <Dialog.Root open={open}>
       <Dialog.Trigger
@@ -78,7 +90,10 @@ const DialogDemo = (props) => {
                 Cancel
               </button>
             </Dialog.Close>
-            <button className="Button bg-red-600 hover:bg-red-700 text-white">
+            <button
+              className="Button bg-red-600 hover:bg-red-700 text-white"
+              onClick={deleteTransaction}
+            >
               Delete
             </button>
           </div>
