@@ -82,7 +82,13 @@ const DialogDemo = (props) => {
               Delete
             </button>
           </div>
-          <Dialog.Close asChild>
+          <Dialog.Close
+            onClick={() => {
+              setIsOpen(false);
+            }}
+            className="cursor-pointer"
+            asChild
+          >
             <button className="IconButton" aria-label="Close">
               <Cross2Icon />
             </button>

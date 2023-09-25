@@ -223,8 +223,29 @@ const updateTransaction = async (req) => {
   }
 };
 
+const deleteTransaction = async (req) => {
+  try {
+    const reqBody = await req.json();
+    console.log(reqBody);
+
+    return new Response(
+      JSON.stringify({ message: 'Transaction Deleted successfully' }),
+      {
+        status: 204,
+      }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: 'Error while deleting data' }),
+      {
+        status: 400,
+      }
+    );
+  }
+};
 export {
   createNewTransaction as POST,
   getTransaction as GET,
   updateTransaction as PATCH,
+  deleteTransaction as DELETE,
 };
