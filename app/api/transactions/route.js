@@ -239,7 +239,7 @@ const deleteTransaction = async (req) => {
         const updateAccountBalance = await Account.findOneAndUpdate(
           {
             $and: [
-              { accountName: transaction?.accountName },
+              { accountName: transaction?.bankAccountName },
               { user: transaction?.user },
             ],
           },
@@ -255,7 +255,7 @@ const deleteTransaction = async (req) => {
           {
             $inc: {
               spending: -transaction.transactionAmount,
-              balance: +transaction.transactionAmount,
+              balance: +Number(transaction.transactionAmount),
             },
           }
           //   { $inc: { balance: body.transactionAmount } },
@@ -264,7 +264,7 @@ const deleteTransaction = async (req) => {
         const updateAccountBalance = await Account.findOneAndUpdate(
           {
             $and: [
-              { accountName: transaction?.accountName },
+              { accountName: transaction?.bankAccountName },
               { user: transaction?.user },
             ],
           },
@@ -274,28 +274,25 @@ const deleteTransaction = async (req) => {
         );
       }
 
-      const updateMetrics = await userMetrics.findOneAndUpdate(
-        {
-          'user.email': transaction.user,
-        },
-        {
-          $inc: {
-            income: -transaction.transactionAmount,
-            balance: -transaction.transactionAmount,
-          },
-        }
-        //   { $inc: { balance: body.transactionAmount } },
-      );
+      // const updateMetrics = await userMetrics.findOneAndUpdate(
+      //   {
+      //     'user.email': transaction.user,
+      //   },
+      //   {
+      //     $inc: {
+      //       income: -transaction.transactionAmount,
+      //       balance: -transaction.transactionAmount,
+      //     },
+      //   }
+      //   //   { $inc: { balance: body.transactionAmount } },
+      // );
 
       // await Transaction.deleteOne({ _id: txnId });
     } else if (transaction?.transactionMode === 'Cash') {
       if (transaction.transactionType === 'income') {
         const updateAccountBalance = await Account.findOneAndUpdate(
           {
-            $and: [
-              { accountName: transaction.accountName },
-              { user: transaction.user },
-            ],
+            $and: [{ accountName: 'cash' }, { user: transaction.user }],
           },
           {
             $inc: { amount: -Number(transaction.transactionAmount) },
@@ -317,10 +314,7 @@ const deleteTransaction = async (req) => {
       } else {
         const updateAccountBalance = await Account.findOneAndUpdate(
           {
-            $and: [
-              { accountName: transaction.accountName },
-              { user: transaction.user },
-            ],
+            $and: [{ accountName: 'cash' }, { user: transaction.user }],
           },
           {
             $inc: { amount: +Number(transaction.transactionAmount) },

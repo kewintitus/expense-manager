@@ -60,7 +60,7 @@ input {
   font-weight: 500;
   height: 35px;
 }
-.Button.violet {
+/* .Button.violet {
   background-color: white;
   color: var(--violet-11);
   box-shadow: 0 2px 10px var(--black-a7);
@@ -80,7 +80,7 @@ input {
 }
 .Button.green:focus {
   box-shadow: 0 0 0 2px var(--green-7);
-}
+} */
 
 .IconButton {
   font-family: inherit;

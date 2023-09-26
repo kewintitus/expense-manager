@@ -6,10 +6,12 @@ import './dialog.css';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const DialogDemo = (props) => {
   console.log(props.txnData);
   const [open, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const deleteTransaction = async () => {
     try {
@@ -17,6 +19,7 @@ const DialogDemo = (props) => {
         `/api/transactions?txnId=${props?.txnData?._id}`
       );
       window.alert('deleted successfully');
+      router.push('/');
     } catch (error) {
       window.alert('Error while deleting data');
     }
@@ -29,9 +32,9 @@ const DialogDemo = (props) => {
           setIsOpen(true);
         }}
       >
-        <IconButton className="Button  bg-red-600 hover:bg-red-800 text-white">
+        <div className="bg-red-600 hover:bg-red-800 text-white w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
           <Delete />
-        </IconButton>
+        </div>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
