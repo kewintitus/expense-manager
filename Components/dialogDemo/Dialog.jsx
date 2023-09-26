@@ -7,6 +7,7 @@ import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import './dialog.css';
 
 const DialogDemo = (props) => {
   console.log(props.txnData);
@@ -38,7 +39,7 @@ const DialogDemo = (props) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
-          className="DialogOverlay"
+          className="DialogOverlay bg-[rgba(0,0,0,0.5)] dark:bg-[rgba(0,0,0,0.5)] h-screen w-screen fixed z-2"
           onClick={() => {
             setIsOpen(false);
           }}
