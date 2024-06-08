@@ -17,11 +17,19 @@ const Login = () => {
           Unlock Your Financial Freedom
         </p>
         <button
-          onClick={signIn}
+          onClick={() => signIn('google')}
           className="bg-blue-900 hover:bg-blue-700 transition-all delay-150 text-white px-3 py-1 rounded-md text-lg w-32 z-50 flex items-center justify-center gap-3"
         >
           <Google />
           <div>Sign in</div>
+        </button>
+        <button
+          onClick={() =>
+            signIn('credentials', { username: 'demo', password: 'demo' })
+          }
+          className="absolute right-3 bottom-3 bg-blue-900 hover:bg-blue-700 transition-all delay-150 text-white px-3 py-1 rounded-md text-lg w-32 z-50 flex items-center justify-center gap-3"
+        >
+          Demo Login
         </button>
       </div>
     </div>

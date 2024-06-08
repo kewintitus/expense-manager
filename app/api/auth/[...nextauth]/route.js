@@ -4,6 +4,7 @@ import userMetrics from '@/models/userMetrics';
 import { connectToDb } from '@/utils/database';
 import { connect } from 'mongoose';
 import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions = {
@@ -11,6 +12,20 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CUSTOMER_ID,
       clientSecret: process.env.GOOGLE_CUSTOMER_SECRET,
+    }),
+    Credentials({
+      name: 'Demo Login',
+      credentials: {
+        username: { label: 'Username', type: 'text', placeholder: 'demo' },
+        password: { label: 'Password', type: 'password', placeholder: 'demo' },
+      },
+      authorize: async (credentials) => {
+        if (credentials.username == 'demo' && credentials.password == 'demo') {
+          return { id: 1, name: 'Demo User', email: 'demo@example.com' };
+        } else {
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {
@@ -24,8 +39,20 @@ export const authOptions = {
     async signIn({ account, profile }) {
       try {
         await connectToDb();
+        console.log(profile, account);
+        let demoEmail = '';
+        let demoUserName = '';
+        let demoProfilePic = '';
+        if (account?.type == 'credentials') {
+          demoUserName = 'Demo User';
+          demoEmail = 'demo@example.com';
+          demoProfilePic =
+            'https://e7.pngegg.com/pngimages/81/570/png-clipart-profile-logo-computer-icons-user-user-blue-heroes-thumbnail.png';
+        }
 
-        const userExists = await User.find({ email: profile.email });
+        const userExists = await User.find({
+          email: profile?.email || demoEmail,
+        });
         // console.log('sign In', profile);
         // console.log('Env Google', process.env.GOOGLE_CUSTOMER_ID);
         // console.log('Check user', userExists);
@@ -33,9 +60,9 @@ export const authOptions = {
         if (!userExists || userExists.length === 0) {
           console.log('Create user in db');
           await User.create({
-            email: profile.email,
-            username: profile.name,
-            image: profile.picture,
+            email: profile?.email || demoEmail,
+            username: profile?.name || demoUserName,
+            image: profile?.picture || demoProfilePic,
           });
 
           await userMetrics.create({
@@ -43,8 +70,8 @@ export const authOptions = {
             income: 0,
             balance: 0,
             user: {
-              email: profile.email,
-              username: profile.name,
+              email: profile?.email || demoEmail,
+              username: profile?.name || demoUserName,
             },
           });
           await Account.create([
@@ -52,14 +79,14 @@ export const authOptions = {
               accountName: 'Demo Account',
               accountType: 'bank',
               amount: 0,
-              user: profile?.email,
+              user: profile?.email || demoEmail,
               createdOn: new Date(),
             },
             {
               accountName: 'cash',
               accountType: 'cash',
               amount: 0,
-              user: profile?.email,
+              user: profile?.email || demoEmail,
               createdOn: new Date(),
             },
           ]);
